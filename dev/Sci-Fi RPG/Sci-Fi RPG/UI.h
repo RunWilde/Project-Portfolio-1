@@ -8,6 +8,8 @@ public:
 
 	void border();
 	void mainMenu();
+
 	int userChoice();
+	int getMainMenuChoice();
 };
 

@@ -22,3 +22,8 @@ int UI::userChoice()
 
 	return choice;
 }
+
+int UI::getMainMenuChoice()
+{
+
+}
