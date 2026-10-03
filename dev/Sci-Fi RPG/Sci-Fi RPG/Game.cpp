@@ -6,6 +6,7 @@ void Game::Start()
 	{
 		ui_.mainMenu();
 		handleMainMenu();
+		ui_.clearScreen();
 	}
 }
 

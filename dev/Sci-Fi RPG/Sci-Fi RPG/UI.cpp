@@ -6,6 +6,11 @@ void UI::border()
 	std::cout << "==================================================" << std::endl;
 }
 
+void UI::clearScreen()
+{
+	system("cls");
+}
+
 void UI::mainMenu()
 {
 	border();

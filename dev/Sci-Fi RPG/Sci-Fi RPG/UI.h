@@ -7,6 +7,7 @@ private:
 public:
 
 	void border();
+	void clearScreen();
 	void mainMenu();
 	void invalidChoice();
 
