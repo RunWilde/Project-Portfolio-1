@@ -11,19 +11,6 @@ void UI::clearScreen()
 	system("cls");
 }
 
-void UI::mainMenu()
-{
-	border();
-
-	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit \n\n" << "Choice: ";
-
-}
-
-void UI::invalidChoice()
-{
-	std::cout << "Invalid choice.\n";
-}
-
 int UI::userChoice()
 {
 	int choice = 0;
@@ -33,7 +20,16 @@ int UI::userChoice()
 	return choice;
 }
 
-int UI::getMainMenuChoice()
+void UI::invalidChoice()
 {
-	return 0;
+	std::cout << "Invalid choice.\n";
 }
+
+void UI::mainMenu()
+{
+	border();
+
+	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit \n\n" << "Choice: ";
+
+}
+

@@ -8,10 +8,11 @@ public:
 
 	void border();
 	void clearScreen();
-	void mainMenu();
+	int userChoice();
 	void invalidChoice();
 
-	int userChoice();
-	int getMainMenuChoice();
+	void mainMenu();
+
+
 };
 
