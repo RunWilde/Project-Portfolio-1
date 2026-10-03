@@ -2,8 +2,11 @@
 
 void Game::Start()
 {
-	ui_.mainMenu();
-	handleMainMenu();
+	while (running_) 
+	{
+		ui_.mainMenu();
+		handleMainMenu();
+	}
 }
 
 void Game::handleMainMenu()
@@ -31,6 +34,7 @@ void Game::handleMainMenu()
 
 	default:
 		// Invalid user choice, display invalid choice message.
+		ui_.invalidChoice();
 		break;
 	}
 }

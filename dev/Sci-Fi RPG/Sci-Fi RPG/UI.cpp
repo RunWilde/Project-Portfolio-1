@@ -10,8 +10,13 @@ void UI::mainMenu()
 {
 	border();
 
-	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit: \n\n" << "Choice: ";
+	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit \n\n" << "Choice: ";
 
+}
+
+void UI::invalidChoice()
+{
+	std::cout << "Invalid choice.\n";
 }
 
 int UI::userChoice()
@@ -25,5 +30,5 @@ int UI::userChoice()
 
 int UI::getMainMenuChoice()
 {
-
+	return 0;
 }
