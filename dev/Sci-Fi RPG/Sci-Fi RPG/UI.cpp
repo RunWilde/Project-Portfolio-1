@@ -11,4 +11,14 @@ void UI::mainMenu()
 	border();
 
 	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit: \n\n" << "Choice: ";
+
+}
+
+int UI::userChoice()
+{
+	int choice = 0;
+
+	std::cin >> choice;
+
+	return choice;
 }

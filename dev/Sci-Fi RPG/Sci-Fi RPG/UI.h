@@ -8,5 +8,6 @@ public:
 
 	void border();
 	void mainMenu();
+	int userChoice();
 };
 
