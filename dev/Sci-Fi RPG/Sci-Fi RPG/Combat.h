@@ -8,6 +8,7 @@ class Combat
 {
 private:
 	UI ui_;
+	bool inCombat_ = true;
 
 public:
 

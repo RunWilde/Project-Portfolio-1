@@ -1,4 +1,7 @@
 #pragma once
+#include "Player.h"
+#include "Enemy.h"
+
 class UI
 {
 
@@ -12,6 +15,7 @@ public:
 	void invalidChoice();
 
 	void mainMenu();
+	void combatStats(const Player& player, const Enemy& enemy);
 	void combatMenu();
 
 };

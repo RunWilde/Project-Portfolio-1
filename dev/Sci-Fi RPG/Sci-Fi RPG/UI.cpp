@@ -33,10 +33,24 @@ void UI::mainMenu()
 
 }
 
+
+
+// ====================
+// Combat Section of UI
+// ====================
+
+void UI::combatStats(const Player& player, const Enemy& enemy)
+{
+	border();
+
+	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
+	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
+}
+
 void UI::combatMenu()
 {
 	border();
-	
-	std::cout << "Combat Menu: \n" << "[1] Attack\n" << "[2] \n" << "[3] Attack 3:\n" << "[4] Return to Main Menu \n";
+
+	std::cout << "Combat Menu: \n" << "[1] Attack\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] Return to Main Menu \n";
 }
 
