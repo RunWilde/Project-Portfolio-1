@@ -51,6 +51,6 @@ void UI::combatMenu()
 {
 	border();
 
-	std::cout << "Combat Menu: \n" << "[1] Attack\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] Return to Main Menu \n";
+	std::cout << "Combat Menu: \n" << "[1] Attack: 1 AP\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] Return to Main Menu \n";
 }
 
