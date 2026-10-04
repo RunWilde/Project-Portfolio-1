@@ -10,14 +10,13 @@ void Game::Start()
 	}
 }
 
-void Game::Combat()
+void Game::newGame()
 {
-	while (running_)
-	{
-		ui_.combatMenu();
-		handleCombatMenu();
-		ui_.clearScreen();
-	}
+	Player player;
+	Enemy enemy;
+	Combat combat;
+
+	combat.startBattle(player, enemy);
 }
 
 void Game::handleMainMenu()
@@ -28,7 +27,7 @@ void Game::handleMainMenu()
 	{
 	case 1:
 		// Start new game
-		Combat();
+		newGame();
 		break;
 
 	case 2:
@@ -64,7 +63,15 @@ void Game::handleCombatMenu()
 			break;
 
 		case 2:
-			// Stop loop and exit back to main menu
+			// Attack type 2
+			break;
+
+		case 3:
+			// Attack type 3
+			break;
+
+		case 4:
+			// Stop main loop and return to menu
 			Start();
 			break;
 

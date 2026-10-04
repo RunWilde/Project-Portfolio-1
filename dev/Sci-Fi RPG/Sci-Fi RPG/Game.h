@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "Combat.h"
 
 class Game
 {
@@ -10,7 +11,7 @@ private:
 public:
 	
 	void Start();
-	void Combat();
+	void newGame();
 	void handleMainMenu();
 	void handleCombatMenu();
 };
