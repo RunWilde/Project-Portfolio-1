@@ -10,6 +10,8 @@ private:
 public:
 	
 	void Start();
+	void Combat();
 	void handleMainMenu();
+	void handleCombatMenu();
 };
 

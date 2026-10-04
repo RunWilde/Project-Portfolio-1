@@ -12,7 +12,7 @@ public:
 	void invalidChoice();
 
 	void mainMenu();
-
+	void combatMenu();
 
 };
 

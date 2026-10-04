@@ -33,3 +33,10 @@ void UI::mainMenu()
 
 }
 
+void UI::combatMenu()
+{
+	border();
+
+	std::cout << "Combat Menu: \n" << "[1] Fire Semi Shot\n" << "[2] Return to Main Menu \n";
+}
+
