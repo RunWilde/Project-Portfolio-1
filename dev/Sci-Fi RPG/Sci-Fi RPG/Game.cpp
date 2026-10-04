@@ -49,36 +49,3 @@ void Game::handleMainMenu()
 		break;
 	}
 }
-
-void Game::handleCombatMenu()
-{
-	int choice = ui_.userChoice();
-	{
-		int choice = ui_.userChoice();
-
-		switch (choice)
-		{
-		case 1:
-			// Attack type 1
-			break;
-
-		case 2:
-			// Attack type 2
-			break;
-
-		case 3:
-			// Attack type 3
-			break;
-
-		case 4:
-			// Stop main loop and return to menu
-			Start();
-			break;
-
-		default:
-			// Invalid user choice, display invalid choice message.
-			ui_.invalidChoice();
-			break;
-		}
-	}
-}

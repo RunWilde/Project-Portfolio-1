@@ -13,6 +13,6 @@ public:
 	void Start();
 	void newGame();
 	void handleMainMenu();
-	void handleCombatMenu();
+
 };
 
