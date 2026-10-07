@@ -45,13 +45,13 @@ void UI::combatStats(const Player& player, const Enemy& enemy, int actionPoints)
 
 	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
 	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
-	std::cout << "\nAction Points Remaining: " << "\n";
+	std::cout << "\nAction Points Remaining: " << actionPoints << "\n";
 }
 
 void UI::combatMenu()
 {
 	border();
 
-	std::cout << "Combat Menu: \n" << "[1] Attack: 1 AP\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] Return to Main Menu \n";
+	std::cout << "Combat Menu: \n" << "[1] Attack: 1 AP\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] End Turn \n";
 }
 
