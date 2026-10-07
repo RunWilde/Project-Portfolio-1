@@ -15,10 +15,10 @@ I worked on setting up a basic main menu as well as a combat menu. Right now I h
 
 🌵 Challenges - What problems did I have & how I'm addressing them
 
-Time management was a big issue this week as I kept getting to focused on the overall project instead of breaking it down into multiple pieces, past that I also didn't start till later in the week. Didn't help I got sick part way through, so while I was overthinking how I was going to do things, I then was unable to do things to do a cold.
+Time management was a big issue this week as I kept getting to focused on the overall project instead of breaking it down into multiple pieces, past that I also didn't start till later in the week. Didn't help I got sick part way through, so while I was overthinking how I was going to do things, I then was unable to think to begin with.
 
 🏆 Accomplishments - What is something I "leveled up" on this week
-I got through and really planned out how I want my game to look at a basic level and now I know what I want the flow to look like for the player. Intro and Menu -> New Game -> Character Creation -> Exploration with Random events -> Find ship to escape planet -> Victory.
+I got through and really planned out how I want my game to look at a basic level and now I know what I want the flow to look like for the player. Intro and Menu -> New Game -> Character Creation -> Exploration with Random events including combat -> Find a way to escape the planet -> Victory.
 
 🔮 Next Steps - What I plan to prioritize and do next
 For week 2 I'm gonna hammer out the rest of the action point system for combat, build the character creator, an actual exploration mode with random events (basically the main game loop) and finally the weapon system.
