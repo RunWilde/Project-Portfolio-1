@@ -10,11 +10,14 @@ private:
 	UI ui_;
 	bool inCombat_;
 
+
+
 public:
 
 	void playerTakeDamage(Player& target, int damage);
 	void enemyTakeDamage(Enemy& target, int damage);
 
 	void startBattle(Player& player, Enemy& enemy);
+	void enemyTurn(Player& player, Enemy& enemy);
 };
 

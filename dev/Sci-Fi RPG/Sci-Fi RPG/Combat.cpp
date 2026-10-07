@@ -23,10 +23,12 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Combat encounter is active
 	inCombat_ = true;
 
+	// Outter Combat Loop
 	while (inCombat_)
 	{
 		int actionPoints = 4;
 
+		// Players turn
 		while (actionPoints > 0 && inCombat_)
 		{
 			ui_.clearScreen();
@@ -65,5 +67,21 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				break;
 			}
 		}
+
+		// Enemy Turn
+		if (inCombat_ && player.isAlive() && enemy.isAlive())
+		{
+			enemyTurn(player, enemy);
+		}
+	}
+}
+
+void Combat::enemyTurn(Player& player, Enemy& enemy)
+{
+	playerTakeDamage(player, 30);
+
+	if (!player.isAlive())
+	{
+		inCombat_ = false;
 	}
 }
