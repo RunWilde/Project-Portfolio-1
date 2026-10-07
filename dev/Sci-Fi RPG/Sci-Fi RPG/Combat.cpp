@@ -30,7 +30,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		while (actionPoints > 0 && inCombat_)
 		{
 			ui_.clearScreen();
-			ui_.combatStats(player, enemy);
+			ui_.combatStats(player, enemy, actionPoints);
 			ui_.combatMenu();
 			int choice = ui_.userChoice();
 
@@ -58,7 +58,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 			case 4:
 				// End turn.
 				actionPoints = 0;
-				return;
+				break;
 
 			default:
 				ui_.invalidChoice();
