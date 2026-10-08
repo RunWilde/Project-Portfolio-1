@@ -1,12 +1,12 @@
 #include "Game.h"
+#include <string>
+#include <vector>
 
 void Game::Start()
 {
 	while (running_) 
 	{
-		ui_.mainMenu();
 		handleMainMenu();
-		ui_.clearScreen();
 	}
 }
 
@@ -46,8 +46,6 @@ void Game::handleMainMenu()
 		break;
 
 	default:
-		// Invalid user choice, display invalid choice message.
-		ui_.invalidChoice();
 		break;
 	}
 }

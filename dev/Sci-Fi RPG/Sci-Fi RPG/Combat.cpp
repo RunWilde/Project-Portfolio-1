@@ -26,15 +26,14 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Outter Combat Loop
 	while (inCombat_)
 	{
+		std::vector<std::string> options = { "Attack: 1 AP", "Attack 2", "Attack 3", "End Turn" };
 		int actionPoints = 4;
 
 		// Players turn
 		while (actionPoints > 0 && inCombat_)
 		{
-			ui_.clearScreen();
 			ui_.combatStats(player, enemy, actionPoints);
-			ui_.combatMenu();
-			int choice = ui_.userChoice();
+			int choice = ui_.menuHandler("Combat Menu", options);
 
 			switch (choice)
 			{
@@ -63,15 +62,14 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				break;
 
 			default:
-				ui_.invalidChoice();
-				break;
+			break;
 			}
 		}
 
 		// Enemy Turn
 		if (inCombat_ && player.isAlive() && enemy.isAlive())
 		{
-			enemyTurn(player, enemy);
+				enemyTurn(player, enemy);
 		}
 	}
 }

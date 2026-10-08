@@ -14,11 +14,9 @@ public:
 	void border();
 	void clearScreen();
 	void invalidChoice();
+	void EnterToContinue();
 
 	int menuHandler(const std::string& menuTitle, const std::vector<std::string>& menuOptions);
-	void mainMenu();
 	void combatStats(const Player& player, const Enemy& enemy, int actionPoints);
-	void combatMenu();
-	
 };
 
