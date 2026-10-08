@@ -11,29 +11,48 @@ void UI::clearScreen()
 	system("cls");
 }
 
-int UI::userChoice()
+int UI::menuHandler(const std::string& menuTitle, const std::vector<std::string>& menuOptions)
 {
 	int choice = 0;
+	std::string tempChoice;
 
-	std::cin >> choice;
-
-	return choice;
-}
-
-void UI::invalidChoice()
-{
-	std::cout << "Invalid choice.\n";
-}
-
-void UI::mainMenu()
-{
 	border();
+	std::cout << menuTitle << std::endl;
 
-	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit \n\n" << "Choice: ";
+	for (int i = 0; i < menuOptions.size(); i++)
+	{
+		std::cout << "[" << i + 1 << "] " << menuOptions[i] << std::endl;
+	}
 
+	while (true) 
+	{
+		std::cout << "Choice: ";
+		std::getline(std::cin, tempChoice);
+
+		// Checking user input for if it's a valid digit or out of range
+		bool isValidNumber = !tempChoice.empty() && tempChoice.size() <= 2;
+
+		for (int i = 0; i < tempChoice.size(); i++)
+		{
+			if (tempChoice[i] < '0' || tempChoice[i] > '9')
+			{
+				isValidNumber = false;
+				break;
+			}
+		}
+
+		if (isValidNumber)
+		{
+			choice = std::stoi(tempChoice);
+			if (choice >= 1 && choice <= menuOptions.size())
+			{
+				return choice;
+			}
+		}
+		// Invalid Choice
+		std::cout << "Invalid Choice, try again." << std::endl;
+	}
 }
-
-
 
 // ====================
 // Combat Section of UI
