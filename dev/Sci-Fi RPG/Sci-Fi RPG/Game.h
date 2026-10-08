@@ -13,6 +13,5 @@ public:
 	void Start();
 	void newGame();
 	void handleMainMenu();
-
 };
 
