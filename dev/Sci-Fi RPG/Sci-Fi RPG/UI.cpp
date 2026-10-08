@@ -3,7 +3,7 @@
 
 void UI::border()
 {
-	std::cout << "==================================================" << std::endl;
+	std::cout << "====================================" << std::endl;
 }
 
 void UI::clearScreen()
@@ -33,7 +33,7 @@ int UI::menuHandler(const std::string& menuTitle, const std::vector<std::string>
 	}
 
 	
-	std::cout << "Choice: ";
+	std::cout << "\nChoice: ";
 	std::getline(std::cin, tempChoice);
 
 	// Checking user input for if it's a valid digit or out of range
@@ -57,11 +57,11 @@ int UI::menuHandler(const std::string& menuTitle, const std::vector<std::string>
 			return choice;
 		}
 	}
+
 	// Invalid Choice
 	std::cout << "Invalid Choice, try again." << std::endl;
 	EnterToContinue();
 	return 0;
-
 }
 
 // ====================

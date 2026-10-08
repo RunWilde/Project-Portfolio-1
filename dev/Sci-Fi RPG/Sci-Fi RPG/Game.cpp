@@ -23,7 +23,7 @@ void Game::handleMainMenu()
 {
 	std::vector<std::string> options = { "New Game", "Load Game", "Credits", "Exit" };
 
-	int choice = ui_.menuHandler("Main Menu", options);
+	int choice = ui_.menuHandler("             Main Menu", options);
 
 	switch (choice)
 	{
