@@ -24,4 +24,9 @@ bool Player::isAlive() const
 	return living;
 }
 
+Weapon& Player::GetWeapon()
+{
+	return weapon_;
+}
+
 

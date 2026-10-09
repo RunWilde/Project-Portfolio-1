@@ -1,4 +1,5 @@
 #pragma once
+#include "Weapon.h"
 
 class Player
 {
@@ -7,6 +8,8 @@ private:
 	int maxHealth_;
 	int health_;
 	int armor_;
+
+	Weapon weapon_;
 
 public:
 	Player();
@@ -18,6 +21,8 @@ public:
 	void SetHealth(int value);
 
 	bool isAlive() const;
+
+	Weapon& GetWeapon();
 
 };
 
