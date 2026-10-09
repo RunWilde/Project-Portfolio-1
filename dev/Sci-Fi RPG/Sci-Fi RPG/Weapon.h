@@ -2,12 +2,19 @@
 #include <string>
 #include <vector>
 
-// This define the actual firemodes possible for a weapon
+// This defines the actual firemodes possible for a weapon
 enum class FireMode
 {
 	Semi,
 	Burst,
 	Auto
+};
+// This Defines the weapon's base, so what it is at it's core.
+// Mainly using this to calculate a weapons accuracy threshold. Still WIP
+enum class WeaponBase
+{
+	Pistol,
+	Rifle
 };
 
 class Weapon
@@ -15,8 +22,8 @@ class Weapon
 
 private:
 	// Weapon Identity
-	std::string WpnName_;
-	int WpnBaseType_;
+	std::string wpnName_;
+	WeaponBase wpnBase_;
 
 	// Weapon Properties
 	int dmg_;
@@ -33,5 +40,19 @@ private:
 
 public:
 
+	Weapon();
+
+	std::string GetName() const;
+	WeaponBase GetBase() const;
+
+	int GetDamage() const;
+	int GetArmorPen() const;
+	int GetAccuracy() const;
+	int GetWeight() const;
+	int GetMagCap()  const;
+	int GetReloadCost() const;
+	int GetCurrentMag() const;
+
+	std::vector<FireMode> GetFireModes() const;
 };
 
