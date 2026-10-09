@@ -9,9 +9,10 @@ void Combat::playerTakeDamage(Player& target, int damage)
 	target.SetHealth(hp);
 }
 
-void Combat::enemyTakeDamage(Enemy& target, int damage)
+void Combat::enemyTakeDamage(Player& player, Enemy& target)
 {
 	int hp = target.GetHealth();
+	int damage = player.GetWeapon().GetDamage();
 
 	hp -= damage;
 
@@ -26,7 +27,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Outter Combat Loop
 	while (inCombat_)
 	{
-		std::vector<std::string> options = { "Attack: 1 AP", "Attack 2", "Attack 3", "End Turn" };
+		std::vector<std::string> options = { "Semi Shot: 1 AP", "Attack 2", "Attack 3", "End Turn" };
 		int actionPoints = 4;
 
 		// Players turn
@@ -39,7 +40,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 			{
 			case 1:
 				// Attack costs 1 AP.
-				enemyTakeDamage(enemy, 30);
+				enemyTakeDamage(player, enemy);
 				actionPoints -= 1;
 
 				if (!enemy.isAlive())
