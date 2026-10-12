@@ -5,16 +5,13 @@
 // This defines the actual firemodes possible for a weapon
 enum class FireMode
 {
-	Semi,
-	Burst,
-	Auto
+	Semi,Burst,Auto
 };
 // This Defines the weapon's base, so what it is at it's core.
-// Mainly using this to calculate a weapons accuracy threshold. Still WIP
+// Mainly using this to calculate a weapons accuracy threshold/starting numbers. Still WIP
 enum class WeaponBase
 {
-	Pistol,
-	Rifle
+	Pistol,Rifle
 };
 
 class Weapon
