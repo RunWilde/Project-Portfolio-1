@@ -1,22 +1,49 @@
 #include "Combat.h"
 
-void Combat::playerTakeDamage(Player& target, int damage)
+void Combat::playerAttack(Player& player, Enemy& target)
 {
-	int hp = target.GetHealth();
 
-	hp -= damage;
+	unsigned int hp = target.GetHealth();
+	unsigned int damage = player.GetWeapon().GetDamage();
+	unsigned int armor = target.GetArmor();
+	unsigned int accPlay = player.GetAgility();
+	unsigned int accGun = player.GetWeapon().GetAccuracy();
+	unsigned int apGun = player.GetWeapon().GetArmorPen();
 
-	target.SetHealth(hp);
+	
+	int hit = d100_ + accPlay;
+
+	if (hit > accGun)
+	{
+		// Damage calculation: 
+		// Health - ((Armor pen - Armor) - Damage) = new Health
+		hp -= ((apGun - armor) - damage);
+
+		target.SetHealth(hp);
+
+		// Display to console enemy hit for x amount of damage
+		std::cout << "Enemy hit for" 
+		// if damage == 0, Display to console, enemy armor is too high
+	}
+	else{ // Display to console, miss}
+	
+
+
+	//int hp = target.GetHealth();
+
+	//hp -= damage;
+
+	//target.SetHealth(hp);
 }
 
-void Combat::enemyTakeDamage(Player& player, Enemy& target)
+void Combat::enemyAttack(Enemy& enemy, Player& target)
 {
-	int hp = target.GetHealth();
-	int damage = player.GetWeapon().GetDamage();
+	//int hp = target.GetHealth();
+	//int damage = player.GetWeapon().GetDamage();
 
-	hp -= damage;
+	//hp -= damage;
 
-	target.SetHealth(hp);
+	//target.SetHealth(hp);
 }
 
 void Combat::startBattle(Player& player, Enemy& enemy)
@@ -27,7 +54,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Outter Combat Loop
 	while (inCombat_)
 	{
-		std::vector<std::string> options = { "Semi Shot: 1 AP", "Attack 2", "Attack 3", "End Turn" };
+		std::vector<std::string> options = { "Attack", "Action 2", "Action 3", "End Turn" };
 		int actionPoints = 4;
 
 		// Players turn
@@ -40,7 +67,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 			{
 			case 1:
 				// Attack costs 1 AP.
-				enemyTakeDamage(player, enemy);
+				playerAttack(player, enemy);
 				actionPoints -= 1;
 
 				if (!enemy.isAlive())
@@ -77,7 +104,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 
 void Combat::enemyTurn(Player& player, Enemy& enemy)
 {
-	playerTakeDamage(player, 30);
+	/*playerTakeDamage(player, 30);*/
 
 	if (!player.isAlive())
 	{
