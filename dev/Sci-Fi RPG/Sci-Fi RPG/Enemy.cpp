@@ -4,7 +4,7 @@ Enemy::Enemy()
 {
 	maxHealth_ = 200;
 	health_ = 200;
-	armor_ = 100;
+	armor_ = 10;
 }
 
 int Enemy::GetHealth() const { return health_; }
