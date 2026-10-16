@@ -11,7 +11,7 @@ void Combat::playerAttack(Player& player, Enemy& target)
 	int apGun = player.GetWeapon().GetArmorPen();
 
 	// Don't forget to add player accuracy when implemented
-	int hit = 80;
+	int hit = Math::dice(1, 100);
 
 	if (hit >= accGun)
 	{

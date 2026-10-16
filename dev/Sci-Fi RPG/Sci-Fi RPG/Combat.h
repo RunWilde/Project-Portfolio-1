@@ -10,7 +10,6 @@ class Combat
 private:
 	UI ui_;
 	bool inCombat_;
-	int d100_ = Math::dice(1,100);
 
 public:
 

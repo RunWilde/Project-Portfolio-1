@@ -13,8 +13,5 @@ public:
 	void Start();
 	void newGame();
 	void handleMainMenu();
-
-	void d100();
-	void d20();
 };
 
