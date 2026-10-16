@@ -3,37 +3,49 @@
 void Combat::playerAttack(Player& player, Enemy& target)
 {
 
-	unsigned int hp = target.GetHealth();
-	unsigned int damage = player.GetWeapon().GetDamage();
-	unsigned int armor = target.GetArmor();
-	unsigned int accPlay = player.GetAgility();
-	unsigned int accGun = player.GetWeapon().GetAccuracy();
-	unsigned int apGun = player.GetWeapon().GetArmorPen();
+	int hp = target.GetHealth();
+	int gunDamage = player.GetWeapon().GetDamage();
+	int armor = target.GetArmor();
+	int accPlay = player.GetAgility();
+	int accGun = player.GetWeapon().GetAccuracy();
+	int apGun = player.GetWeapon().GetArmorPen();
 
-	
-	int hit = d100_ + accPlay;
+	// Don't forget to add player accuracy when implemented
+	int hit = 80;
 
-	if (hit > accGun)
+	if (hit >= accGun)
 	{
-		// Damage calculation: 
-		// Health - ((Armor pen - Armor) - Damage) = new Health
-		hp -= ((apGun - armor) - damage);
+		// Armor Pen removes armor, but excess pen doesn't add damage
+		int effectiveArmor = armor - apGun;
 
-		target.SetHealth(hp);
+		if (effectiveArmor < 0)
+		{
+			effectiveArmor = 0;
+		}
 
-		// Display to console enemy hit for x amount of damage
-		std::cout << "Enemy hit for" 
-		// if damage == 0, Display to console, enemy armor is too high
+		// Remaining armor reduces the weapon's damage
+		int recievedDamage = gunDamage - effectiveArmor;
+
+		if (recievedDamage < 0)
+		{
+			recievedDamage = 0;
+		}
+
+		// If armor blocks all damage, display to console
+		if (recievedDamage == 0)
+		{
+			std::cout << "Your shot hit, but the enemy's armor blocked all damage!" << std::endl;
+		}
+		else 
+		{
+			hp -= recievedDamage;
+
+			target.SetHealth(hp);
+
+			std::cout << "Enemy hit for " << recievedDamage << " damage!" << std::endl;
+		}
 	}
-	else{ // Display to console, miss}
-	
-
-
-	//int hp = target.GetHealth();
-
-	//hp -= damage;
-
-	//target.SetHealth(hp);
+	else { std::cout << "You missed!" << std::endl; } // Display to console, miss
 }
 
 void Combat::enemyAttack(Enemy& enemy, Player& target)
