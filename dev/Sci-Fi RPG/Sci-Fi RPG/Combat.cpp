@@ -73,14 +73,12 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		while (actionPoints > 0 && inCombat_)
 		{
 			combatStats(player, enemy, actionPoints);
-			int choice = ui_.menuHandler("Combat Menu", options);
+			int choice = ui_.menuHandler("             Combat Menu", options);
 
 			switch (choice)
 			{
 			case 1:
-				// Attack costs 1 AP.
-				playerAttack(player, enemy);
-				actionPoints -= 1;
+				weaponActions(player, enemy, actionPoints);
 
 				if (!enemy.isAlive())
 				{
@@ -112,6 +110,83 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				enemyTurn(player, enemy);
 		}
 	}
+}
+
+void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
+{
+	std::vector<FireMode> fireModes = player.GetWeapon().GetFireModes();
+	std::vector<std::string> options;
+
+	for (int i = 0; i < fireModes.size(); i++)
+	{
+		switch (fireModes[i])
+		{
+		case FireMode::Semi:
+			options.push_back("Semi: 1 AP");
+			break;
+
+		case FireMode::Burst:
+
+			options.push_back("Burst: 2 AP");
+			break;
+
+		case FireMode::Auto:
+
+			options.push_back("Full Auto: 3 AP");
+			break;
+		}
+	}
+
+	// Back to menu option here.
+	options.push_back("Back");
+
+	int choice = ui_.menuHandler("Attack Options", options);
+
+	// Invalid input or Back returns to the combat menu.
+	if (choice == 0 || choice == static_cast<int>(options.size()))
+	{
+		return;
+	}
+
+	FireMode selectedMode = fireModes[choice - 1];
+
+	int apCost = 0;
+	int shots = 0;
+
+	switch (selectedMode)
+	{
+	case FireMode::Semi:
+		apCost = 1;
+		shots = 1;
+		break;
+
+	case FireMode::Burst:
+		apCost = 2;
+		shots = 3;
+		break;
+
+	case FireMode::Auto:
+		apCost = 3;
+		shots = 10;
+		break;
+	}
+
+	if (actionPoints < apCost)
+	{
+		std::cout << "Not enough action points left!" << std::endl;
+		ui_.EnterToContinue();
+		return;
+	}
+
+	actionPoints -= apCost;
+
+	for (int shot = 0; shot < shots && enemy.isAlive(); shot++)
+	{
+		std::cout << "Shot " << shot + 1 << ": ";
+		playerAttack(player, enemy);
+	}
+
+	ui_.EnterToContinue();
 }
 
 void Combat::enemyTurn(Player& player, Enemy& enemy)
