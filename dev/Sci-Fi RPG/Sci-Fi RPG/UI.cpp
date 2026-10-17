@@ -64,16 +64,3 @@ int UI::menuHandler(const std::string& menuTitle, const std::vector<std::string>
 	return 0;
 }
 
-// ====================
-// Combat Section of UI
-// ====================
-
-void UI::combatStats(const Player& player, const Enemy& enemy, int actionPoints)
-{
-	border();
-
-	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
-	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
-	std::cout << "\nAction Points Remaining: " << actionPoints << "\n";
-}
-

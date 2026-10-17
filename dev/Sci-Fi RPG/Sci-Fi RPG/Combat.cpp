@@ -72,7 +72,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		// Players turn
 		while (actionPoints > 0 && inCombat_)
 		{
-			ui_.combatStats(player, enemy, actionPoints);
+			combatStats(player, enemy, actionPoints);
 			int choice = ui_.menuHandler("Combat Menu", options);
 
 			switch (choice)
@@ -122,4 +122,13 @@ void Combat::enemyTurn(Player& player, Enemy& enemy)
 	{
 		inCombat_ = false;
 	}
+}
+
+void Combat::combatStats(const Player& player, const Enemy& enemy, int actionPoints)
+{
+	ui_.border();
+
+	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
+	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
+	std::cout << "\nAction Points Remaining: " << actionPoints << "\n";
 }

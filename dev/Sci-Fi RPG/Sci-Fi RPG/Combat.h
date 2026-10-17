@@ -18,5 +18,6 @@ public:
 
 	void startBattle(Player& player, Enemy& enemy);
 	void enemyTurn(Player& player, Enemy& enemy);
+	void combatStats(const Player& player, const Enemy& enemy, int actionPoints);
 };
 
