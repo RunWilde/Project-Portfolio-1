@@ -122,7 +122,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 					actionPoints -= reloadCost;
 
 					ui_.border();
-					std::cout << "You eject the current magazine of your " << weapon.GetName() << " and insert a new one." << std::endl;
+					std::cout << "You eject the current magazine of \nyour " << weapon.GetName() << " and insert a new one." << std::endl;
 					ui_.border();
 				}
 
