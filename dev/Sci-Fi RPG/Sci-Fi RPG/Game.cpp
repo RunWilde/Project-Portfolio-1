@@ -13,11 +13,10 @@ void Game::Start()
 
 void Game::newGame()
 {
-	Player player;
 	Enemy enemy;
 	Combat combat;
 
-	combat.startBattle(player, enemy);
+	combat.startBattle(player_, enemy);
 }
 
 void Game::handleMainMenu()
