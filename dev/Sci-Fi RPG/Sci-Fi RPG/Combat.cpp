@@ -63,17 +63,21 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	inCombat_ = true;
 
 	// Turn counter
-	int turnCount = 0;
+	int turnCount = 1;
 
 	// Outter Combat Loop
 	while (inCombat_)
 	{
+		Weapon& weapon = player.GetWeapon();
+		int reloadCost = weapon.GetReloadCost();
+
 		std::vector<std::string> options = 
 		{ 
 			"Attack", 
-			"Reload: 1 AP",
+			"Reload: " + std::to_string(reloadCost) + " AP",
 			"End Turn", 
 			"Leave Range" };
+
 		int actionPoints = 4;
 		bool turnEnded = false;
 
@@ -82,7 +86,6 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		{
 			combatStats(player, enemy, actionPoints);
 			int choice = ui_.menuHandler("          Combat Actions", options);
-			Weapon& weapon = player.GetWeapon();
 
 			switch (choice)
 			{
@@ -107,7 +110,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 					std::cout << "Magazine is already full of ammo." << std::endl;
 					ui_.border();
 				}
-				else if (actionPoints <= 0)
+				else if (actionPoints < reloadCost)
 				{
 					ui_.border();
 					std::cout << "Not enough action points left to reload." << std::endl;
@@ -116,7 +119,8 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				else
 				{
 					weapon.reload();
-					actionPoints -= 1;
+					actionPoints -= reloadCost;
+
 					ui_.border();
 					std::cout << "You eject the current magazine of your " << weapon.GetName() << " and insert a new one." << std::endl;
 					ui_.border();
@@ -143,11 +147,12 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		// Add one to turn count
 		if (inCombat_)
 		{
-			turnCount += 1;
 			ui_.border();
 			std::cout << "End of turn " << turnCount << "." << std::endl;
 			ui_.border();
 			ui_.EnterToContinue();
+
+			turnCount += 1;
 		}
 		else
 		{
