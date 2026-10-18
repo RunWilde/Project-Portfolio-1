@@ -1,17 +1,16 @@
 #include "Combat.h"
 
-void Combat::playerAttack(Player& player, Enemy& target)
+void Combat::playerAttack(Player& player, Enemy& target, int accBonus)
 {
 
 	int hp = target.GetHealth();
 	int gunDamage = player.GetWeapon().GetDamage();
 	int armor = target.GetArmor();
-	int accPlay = player.GetAgility();
+	/*int accPlay = player.GetAgility();*/
 	int accGun = player.GetWeapon().GetAccuracy();
 	int apGun = player.GetWeapon().GetArmorPen();
 
-	// Don't forget to add player accuracy when implemented
-	int hit = Math::dice(1, 100);
+	int hit = Math::dice(1, 100) + accBonus;
 
 	if (hit >= accGun)
 	{
@@ -122,17 +121,15 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 		switch (fireModes[i])
 		{
 		case FireMode::Semi:
-			options.push_back("Semi: 1 AP");
+			options.push_back("Semi: 1 AP (+10 Accuracy)");
 			break;
 
 		case FireMode::Burst:
-
 			options.push_back("Burst: 2 AP");
 			break;
 
 		case FireMode::Auto:
-
-			options.push_back("Full Auto: 3 AP");
+			options.push_back("Full Auto: 3 AP (-10 Accuracy)");
 			break;
 		}
 	}
@@ -152,22 +149,26 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 
 	int apCost = 0;
 	int shots = 0;
+	int accBonus = 0;
 
 	switch (selectedMode)
 	{
 	case FireMode::Semi:
 		apCost = 1;
 		shots = 1;
+		accBonus = 10;
 		break;
 
 	case FireMode::Burst:
 		apCost = 2;
 		shots = 3;
+		accBonus = 0;
 		break;
 
 	case FireMode::Auto:
 		apCost = 3;
 		shots = 10;
+		accBonus = -10;
 		break;
 	}
 
@@ -183,7 +184,7 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 	for (int shot = 0; shot < shots && enemy.isAlive(); shot++)
 	{
 		std::cout << "Shot " << shot + 1 << ": ";
-		playerAttack(player, enemy);
+		playerAttack(player, enemy, accBonus);
 	}
 
 	ui_.EnterToContinue();

@@ -13,7 +13,7 @@ private:
 
 public:
 
-	void playerAttack(Player& player, Enemy& target);
+	void playerAttack(Player& player, Enemy& target, int accBonus);
 	void enemyAttack(Enemy& enemy, Player& target);
 
 	void startBattle(Player& player, Enemy& enemy);
