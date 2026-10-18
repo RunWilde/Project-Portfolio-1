@@ -150,6 +150,7 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 	int apCost = 0;
 	int shots = 0;
 	int accBonus = 0;
+	std::string wepName = player.GetWeapon().GetName();
 
 	switch (selectedMode)
 	{
@@ -179,10 +180,25 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 		return;
 	}
 
+	if (player.GetWeapon().GetCurrentMag() <= 0)
+	{
+		std::cout << "You clench the trigger- Click!\n" << "Your magazine appears to be empty." << std::endl;
+		ui_.EnterToContinue();
+		return;
+	}
+
 	actionPoints -= apCost;
 
 	for (int shot = 0; shot < shots && enemy.isAlive(); shot++)
 	{
+		if (player.GetWeapon().GetCurrentMag() <= 0)
+		{
+			std::cout << "Your " << wepName << " has stopped firing\n" << "It ran out of boolets." << std::endl;
+			break;
+		}
+
+		player.GetWeapon().useBoolet();
+
 		std::cout << "Shot " << shot + 1 << ": ";
 		playerAttack(player, enemy, accBonus);
 	}

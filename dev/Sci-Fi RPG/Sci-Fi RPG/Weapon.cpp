@@ -61,6 +61,14 @@ int Weapon::GetCurrentMag() const
 	return curMag_;
 }
 
+void Weapon::useBoolet()
+{
+	if (curMag_ > 0)
+	{
+		curMag_--;
+	}
+}
+
 std::vector<FireMode> Weapon::GetFireModes() const
 {
 	return frMode_;

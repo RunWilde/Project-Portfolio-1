@@ -50,6 +50,7 @@ public:
 	int GetReloadCost() const;
 	int GetCurrentMag() const;
 
+	void useBoolet();
 	std::vector<FireMode> GetFireModes() const;
 };
 
