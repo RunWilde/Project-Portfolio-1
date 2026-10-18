@@ -35,6 +35,6 @@ public:
 	bool isAlive() const;
 
 	Weapon& GetWeapon();
-
+	const Weapon& GetWeapon() const;
 };
 

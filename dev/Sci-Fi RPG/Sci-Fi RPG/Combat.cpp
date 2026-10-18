@@ -221,6 +221,10 @@ void Combat::combatStats(const Player& player, const Enemy& enemy, int actionPoi
 	ui_.border();
 
 	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
+
+	const Weapon& weapon = player.GetWeapon();
+	std::cout << "Weapon: " << weapon.GetName() << "  |  ";
+	std::cout << "Ammo: " << weapon.GetCurrentMag() << "/" << weapon.GetMagCap() << "\n";
 	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
 	std::cout << "\nAction Points Remaining: " << actionPoints << "\n";
 }

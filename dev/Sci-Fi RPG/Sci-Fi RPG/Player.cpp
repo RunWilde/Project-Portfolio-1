@@ -36,4 +36,9 @@ Weapon& Player::GetWeapon()
 	return weapon_;
 }
 
+const Weapon& Player::GetWeapon() const
+{
+	return weapon_;
+}
+
 
