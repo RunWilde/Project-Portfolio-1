@@ -68,7 +68,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		std::vector<std::string> options = 
 		{ 
 			"Attack", 
-			"Reload",
+			"Reload: 1 AP",
 			"Action 3", 
 			"End Turn" };
 		int actionPoints = 4;
@@ -78,6 +78,7 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		{
 			combatStats(player, enemy, actionPoints);
 			int choice = ui_.menuHandler("             Combat Menu", options);
+			Weapon& weapon = player.GetWeapon();
 
 			switch (choice)
 			{
@@ -92,7 +93,23 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 
 			case 2:
 				// Reload action
+				if (weapon.GetCurrentMag() >= weapon.GetMagCap())
+				{
+					std::cout << "Magazine is already full of ammo." << std::endl;
+				}
+				else if (actionPoints <= 0)
+				{
+					std::cout << "Not enough action points left to reload." << std::endl;
+				}
+				else
+				{
+					weapon.reload();
+					actionPoints -= 1;
 
+					std::cout << "You eject the current magazine of your " << weapon.GetName() << " and insert a new one." << std::endl;
+				}
+
+				ui_.EnterToContinue();
 				break;
 
 			case 3:
