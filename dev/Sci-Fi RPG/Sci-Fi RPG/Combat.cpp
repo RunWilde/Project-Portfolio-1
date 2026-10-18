@@ -62,6 +62,9 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Combat encounter is active
 	inCombat_ = true;
 
+	// Turn counter
+	int turnCount = 0;
+
 	// Outter Combat Loop
 	while (inCombat_)
 	{
@@ -69,15 +72,16 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 		{ 
 			"Attack", 
 			"Reload: 1 AP",
-			"Action 3", 
-			"End Turn" };
+			"End Turn", 
+			"Leave Range" };
 		int actionPoints = 4;
+		bool turnEnded = false;
 
 		// Players turn
-		while (actionPoints > 0 && inCombat_)
+		while (!turnEnded && inCombat_)
 		{
 			combatStats(player, enemy, actionPoints);
-			int choice = ui_.menuHandler("             Combat Menu", options);
+			int choice = ui_.menuHandler("          Combat Actions", options);
 			Weapon& weapon = player.GetWeapon();
 
 			switch (choice)
@@ -87,6 +91,10 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 
 				if (!enemy.isAlive())
 				{
+					ui_.border();
+					std::cout << "Target destroyed on turn " << turnCount << std::endl;
+					ui_.border();
+					ui_.EnterToContinue();
 					inCombat_ = false;
 				}
 				break;
@@ -95,30 +103,36 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				// Reload action
 				if (weapon.GetCurrentMag() >= weapon.GetMagCap())
 				{
+					ui_.border();
 					std::cout << "Magazine is already full of ammo." << std::endl;
+					ui_.border();
 				}
 				else if (actionPoints <= 0)
 				{
+					ui_.border();
 					std::cout << "Not enough action points left to reload." << std::endl;
+					ui_.border();
 				}
 				else
 				{
 					weapon.reload();
 					actionPoints -= 1;
-
+					ui_.border();
 					std::cout << "You eject the current magazine of your " << weapon.GetName() << " and insert a new one." << std::endl;
+					ui_.border();
 				}
 
 				ui_.EnterToContinue();
 				break;
 
 			case 3:
-				// Attack type 3 - not implemented yet
+				// End turn.
+				turnEnded = true;
 				break;
 
 			case 4:
-				// End turn.
-				actionPoints = 0;
+				// Leave the Range
+				inCombat_ = false;
 				break;
 
 			default:
@@ -126,10 +140,21 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 			}
 		}
 
-		// Enemy Turn
-		if (inCombat_ && player.isAlive() && enemy.isAlive())
+		// Add one to turn count
+		if (inCombat_)
 		{
-				enemyTurn(player, enemy);
+			turnCount += 1;
+			ui_.border();
+			std::cout << "End of turn " << turnCount << "." << std::endl;
+			ui_.border();
+			ui_.EnterToContinue();
+		}
+		else
+		{
+			ui_.border();
+			std::cout << "Combat Practice Over." << std::endl;
+			ui_.border();
+			ui_.EnterToContinue();
 		}
 	}
 }
