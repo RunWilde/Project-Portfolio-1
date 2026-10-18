@@ -65,7 +65,12 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 	// Outter Combat Loop
 	while (inCombat_)
 	{
-		std::vector<std::string> options = { "Attack", "Action 2", "Action 3", "End Turn" };
+		std::vector<std::string> options = 
+		{ 
+			"Attack", 
+			"Reload",
+			"Action 3", 
+			"End Turn" };
 		int actionPoints = 4;
 
 		// Players turn
@@ -86,7 +91,8 @@ void Combat::startBattle(Player& player, Enemy& enemy)
 				break;
 
 			case 2:
-				// Attack type 2 - not implemented yet
+				// Reload action
+
 				break;
 
 			case 3:

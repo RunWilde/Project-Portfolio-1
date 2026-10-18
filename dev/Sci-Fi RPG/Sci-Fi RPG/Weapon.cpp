@@ -69,6 +69,11 @@ void Weapon::useBoolet()
 	}
 }
 
+void Weapon::reload()
+{
+	curMag_ = magCap_;
+}
+
 std::vector<FireMode> Weapon::GetFireModes() const
 {
 	return frMode_;

@@ -51,6 +51,7 @@ public:
 	int GetCurrentMag() const;
 
 	void useBoolet();
+	void reload();
 	std::vector<FireMode> GetFireModes() const;
 };
 
