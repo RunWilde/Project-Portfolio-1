@@ -14,6 +14,11 @@ enum class WeaponBase
 	Pistol,Rifle
 };
 
+enum class Barrel
+{
+	CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
+};
+
 class Weapon
 {
 
@@ -21,6 +26,9 @@ private:
 	// Weapon Identity
 	std::string wpnName_;
 	WeaponBase wpnBase_;
+
+	//Weapon Parts
+	Barrel wpnBarrel_;
 
 	// Weapon Properties
 	int dmg_;
@@ -42,6 +50,7 @@ public:
 	std::string GetName() const;
 	WeaponBase GetBase() const;
 
+	// Weapon Stat getters
 	int GetDamage() const;
 	int GetArmorPen() const;
 	int GetAccuracy() const;
@@ -49,6 +58,10 @@ public:
 	int GetMagCap()  const;
 	int GetReloadCost() const;
 	int GetCurrentMag() const;
+
+	// Weapon part getters/setters
+
+	void SetBarrel(Barrel wpnBarrel_);
 
 	void useBoolet();
 	void reload();

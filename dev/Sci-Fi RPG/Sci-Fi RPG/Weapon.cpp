@@ -2,9 +2,14 @@
 
 Weapon::Weapon()
 {
+	// Weapon identity
 	wpnName_ = "AK-47";
 	wpnBase_ = WeaponBase::Rifle;
 
+	// Weapon Parts
+	wpnBarrel_ = Barrel::Rifle;
+
+	// Weapon stats
 	dmg_ = 35;
 	armP_ = 55;
 	acc_ = 76;
@@ -59,6 +64,12 @@ int Weapon::GetReloadCost() const
 int Weapon::GetCurrentMag() const
 {
 	return curMag_;
+}
+
+void Weapon::SetBarrel(Barrel newBarrel_)
+{
+	wpnBarrel_ = newBarrel_;
+
 }
 
 void Weapon::useBoolet()
