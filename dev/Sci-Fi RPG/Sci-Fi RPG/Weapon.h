@@ -44,6 +44,7 @@ private:
 	int curMag_;
 
 	void RecalculateStats();
+	void SelectBarrel();
 public:
 
 	Weapon();

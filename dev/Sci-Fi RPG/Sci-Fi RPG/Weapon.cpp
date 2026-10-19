@@ -132,6 +132,51 @@ void Weapon::RecalculateStats()
 	}
 }
 
+void Weapon::SelectBarrel()
+{
+	UI ui_;
+
+	std::vector<std::string> options = { "Compact SMG", "SMG", "Compact Carbine", "Carbine", "Rifle", "Long Rifle", "Back" };
+	
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Barrel Type", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetBarrel(Barrel::CompactSMG);
+			return;
+
+		case 2:
+			SetBarrel(Barrel::SMG);
+			return;
+
+		case 3:
+			SetBarrel(Barrel::CompactCarbine);
+			return;
+
+		case 4:
+			SetBarrel(Barrel::Carbine);
+			return;
+
+		case 5:
+			SetBarrel(Barrel::Rifle);
+			return;
+
+		case 6:
+			SetBarrel(Barrel::LongRifle);
+			return;
+
+		case 7:
+			return;
+
+		default:
+			break;
+		}
+	}
+}
+
 void Weapon::useBoolet()
 {
 	if (curMag_ > 0)
@@ -152,5 +197,7 @@ std::vector<FireMode> Weapon::GetFireModes() const
 
 bool Weapon::Customize()
 {
+
+
 	return false;
 }
