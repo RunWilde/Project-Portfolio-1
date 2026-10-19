@@ -200,14 +200,14 @@ bool Weapon::Customize()
 {
 	UI ui_;
 
-	SelectBarrel();
-
 	std::vector<std::string> options = 
 	{ "Change Base", "Change Barrel", "Change caliber", "Change sight", "Change muzzle", "Change stock", "Change Fire Selector", "Change Magazine", "Confirm", "Cancel"};
 
 	while (true)
 	{
 		ui_.clearScreen();
+		ui_.border();
+		std::cout << "            Weapon Stats" << std::endl;
 		ui_.border();
 		int accPercent = 101 - acc_;
 
@@ -219,7 +219,7 @@ bool Weapon::Customize()
 		std::cout << "Mag size: " << magCap_ << std::endl;
 		std::cout << "Reload Cost: " << wpnRelCo_ << " AP" << std::endl;
 
-		int choice = ui_.menuHandler("             Weapon Review", options);
+		int choice = ui_.menuHandler("         Weapon Parts List", options);
 
 		switch (choice)
 		{
