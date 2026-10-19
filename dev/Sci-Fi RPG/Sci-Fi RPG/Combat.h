@@ -2,7 +2,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "UI.h"
-
+#include "Math.h"
+#include <iostream>
 
 class Combat
 {
@@ -12,9 +13,12 @@ private:
 
 public:
 
-	void playerTakeDamage(Player& target, int damage);
-	void enemyTakeDamage(Enemy& target, int damage);
+	void playerAttack(Player& player, Enemy& target, int accBonus);
+	void enemyAttack(Enemy& enemy, Player& target);
 
 	void startBattle(Player& player, Enemy& enemy);
+	void weaponActions(Player& player, Enemy& enemy, int& actionPoints);
+	void enemyTurn(Player& player, Enemy& enemy);
+	void combatStats(const Player& player, const Enemy& enemy, int actionPoints, int turnCount);
 };
 

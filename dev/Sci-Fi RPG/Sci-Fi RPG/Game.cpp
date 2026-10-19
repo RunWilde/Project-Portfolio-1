@@ -1,42 +1,52 @@
 #include "Game.h"
-// Dev Branch sheez
+#include <string>
+#include <vector>
+#include <random>
 
 void Game::Start()
 {
 	while (running_) 
 	{
-		ui_.mainMenu();
 		handleMainMenu();
-		ui_.clearScreen();
 	}
 }
 
 void Game::newGame()
 {
-	Player player;
 	Enemy enemy;
 	Combat combat;
 
-	combat.startBattle(player, enemy);
+	combat.startBattle(player_, enemy);
 }
 
 void Game::handleMainMenu()
 {
-	int choice = ui_.userChoice();
+	std::vector<std::string> options = { "Customize Weapon", "Load Weapon", "Enter Firing Range", "Exit" };
+
+	int choice = ui_.menuHandler("             Main Menu", options);
 
 	switch (choice)
 	{
 	case 1:
-		// Start new game
-		newGame();
-		break;
+	{
+		// Customize weapon
+		Weapon customWeapon = player_.GetWeapon();
 
+		// Add weapon to the player once customization is done.
+		if (customWeapon.Customize())
+		{
+			player_.GetWeapon() = customWeapon;
+		}
+
+		break;
+	}
 	case 2:
-		// Load saved game
+		// Load saved Weapon
 		break;
 
 	case 3:
-		// Display credits and then return to main menu
+		// Enter the firing range
+		newGame();
 		break;
 
 	case 4:
@@ -45,8 +55,8 @@ void Game::handleMainMenu()
 		break;
 
 	default:
-		// Invalid user choice, display invalid choice message.
-		ui_.invalidChoice();
 		break;
 	}
+
+
 }

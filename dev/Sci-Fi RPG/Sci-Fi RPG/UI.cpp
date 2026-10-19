@@ -3,7 +3,7 @@
 
 void UI::border()
 {
-	std::cout << "==================================================" << std::endl;
+	std::cout << "====================================" << std::endl;
 }
 
 void UI::clearScreen()
@@ -11,46 +11,56 @@ void UI::clearScreen()
 	system("cls");
 }
 
-int UI::userChoice()
+void UI::EnterToContinue()
+{
+	std::cout << "Press enter to continue...";
+	std::cin.get();
+	clearScreen();
+}
+
+int UI::menuHandler(const std::string& menuTitle, const std::vector<std::string>& menuOptions)
 {
 	int choice = 0;
+	std::string tempChoice;
 
-	std::cin >> choice;
-
-	return choice;
-}
-
-void UI::invalidChoice()
-{
-	std::cout << "Invalid choice.\n";
-}
-
-void UI::mainMenu()
-{
+	border();
+	std::cout << menuTitle << std::endl;
 	border();
 
-	std::cout << "Main Menu: \n" << "[1] New Game\n" << "[2] Load Game\n" << "[3] Credits \n" << "[4] Exit \n\n" << "Choice: ";
+	for (int i = 0; i < menuOptions.size(); i++)
+	{
+		std::cout << "[" << i + 1 << "] " << menuOptions[i] << std::endl;
+	}
 
-}
+	
+	std::cout << "\nChoice: ";
+	std::getline(std::cin, tempChoice);
 
+	// Checking user input for if it's a valid digit or out of range
+	bool isValidNumber = !tempChoice.empty() && tempChoice.size() <= 2;
 
+	for (int i = 0; i < tempChoice.size(); i++)
+	{
+		if (tempChoice[i] < '0' || tempChoice[i] > '9')
+		{
+			isValidNumber = false;
+			break;
+		}
+	}
 
-// ====================
-// Combat Section of UI
-// ====================
+	if (isValidNumber)
+	{
+		choice = std::stoi(tempChoice);
+		if (choice >= 1 && choice <= menuOptions.size())
+		{
+			clearScreen();
+			return choice;
+		}
+	}
 
-void UI::combatStats(const Player& player, const Enemy& enemy)
-{
-	border();
-
-	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
-	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
-}
-
-void UI::combatMenu()
-{
-	border();
-
-	std::cout << "Combat Menu: \n" << "[1] Attack: 1 AP\n" << "[2] Action 2\n" << "[3] Action 3\n" << "[4] Return to Main Menu \n";
+	// Invalid Choice
+	std::cout << "Invalid Choice, try again." << std::endl;
+	EnterToContinue();
+	return 0;
 }
 
