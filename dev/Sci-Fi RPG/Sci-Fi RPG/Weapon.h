@@ -45,6 +45,7 @@ private:
 	int curMag_;
 
 	void RecalculateStats();
+	void SelectWpnBase();
 	void SelectBarrel();
 public:
 
@@ -63,7 +64,7 @@ public:
 	int GetCurrentMag() const;
 
 	// Weapon part getters/setters
-
+	void SetWpnBase(WeaponBase wpnBase_);
 	void SetBarrel(Barrel wpnBarrel_);
 
 	void useBoolet();

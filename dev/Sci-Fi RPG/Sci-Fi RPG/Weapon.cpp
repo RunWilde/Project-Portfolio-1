@@ -69,6 +69,13 @@ int Weapon::GetCurrentMag() const
 	return curMag_;
 }
 
+void Weapon::SetWpnBase(WeaponBase newBase_)
+{
+	wpnBase_ = newBase_;
+
+	RecalculateStats();
+}
+
 // Weapon Part Setters
 void Weapon::SetBarrel(Barrel newBarrel_)
 {
@@ -81,9 +88,21 @@ void Weapon::SetBarrel(Barrel newBarrel_)
 void Weapon::RecalculateStats()
 {
 	dmg_ = 25;
-	acc_ = 94;
 	armP_ = 45;
 	wt_ = 17;
+
+	// Weapon Base here, Starting accuracy threshold
+	switch (wpnBase_)
+	{
+	case WeaponBase::Pistol:
+		acc_ = 55;
+		break;
+
+	case WeaponBase::Rifle:
+		acc_ = 100;
+		break;
+
+	}
 
 	// CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
 	switch (wpnBarrel_)
@@ -130,6 +149,33 @@ void Weapon::RecalculateStats()
 		wt_ += 4;
 		break;
 
+	}
+}
+
+void Weapon::SelectWpnBase()
+{
+	UI ui_;
+
+	std::vector<std::string> options = { "Pistol", "Rifle", "Back"};
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("Weapon Base", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetWpnBase(WeaponBase::Pistol);
+			return;
+		case 2:
+			SetWpnBase(WeaponBase::Rifle);
+			return;
+		case 3:
+			return;
+
+		default:
+			break;
+		}
 	}
 }
 
