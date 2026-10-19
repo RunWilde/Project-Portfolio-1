@@ -87,9 +87,7 @@ void Weapon::SetBarrel(Barrel newBarrel_)
 // Weapon functions
 void Weapon::RecalculateStats()
 {
-	dmg_ = 25;
-	armP_ = 45;
-	wt_ = 17;
+	
 
 	// Weapon Base here, Starting accuracy threshold
 	switch (wpnBase_)
@@ -271,7 +269,7 @@ bool Weapon::Customize()
 		{
 			// Base
 		case 1:
-			
+			SelectWpnBase();
 			break;
 			// Barrel
 		case 2:
