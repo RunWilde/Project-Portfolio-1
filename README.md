@@ -9,6 +9,7 @@ Hello my name is Noah West. I am a student from franklin, Tennessee. The purpose
 
 Each week I will summarize my milestone activity and progress by writing a stand-up. A stand-up is meant to be a succinct update on how things are going. Use these prompts as a guide on what to write about:
 
+## Week 1
 ⚙️ Overview - What I worked on this past week
 
 I worked on setting up a basic main menu as well as a combat menu. Right now I have a super basic combat scenario where it only really just drains the enemies health until they die, once that happens it returns you to the main menu. Besides that I set up basic stuff for the player with health and some other values as well as enemies.
@@ -22,13 +23,28 @@ I got through and really planned out how I want my game to look at a basic level
 
 🔮 Next Steps - What I plan to prioritize and do next
 For week 2 I'm gonna hammer out the rest of the action point system for combat, build the character creator, an actual exploration mode with random events (basically the main game loop) and finally the weapon system.
+
+## Week 2
+⚙️ Overview - What I worked on this past week
+
+The past week I've worked on UI updates and damage calculation for the players weapon.
+
+🌵 Challenges - What problems did I have & how I'm addressing them
+
+Time management was a big issue this week as I kept getting to focused on the overall project instead of breaking it down into multiple pieces, past that I also didn't start till later in the week. Didn't help I got sick part way through, so while I was overthinking how I was going to do things, I then was unable to think to begin with.
+
+🏆 Accomplishments - What is something I "leveled up" on this week
+My planning has gotten a lot better, I'm now even writing pseudocode that I can follow alongside my code that makes building much faster.
+
+🔮 Next Steps - What I plan to prioritize and do next
+I have essentially completed what I wanted to, or at least built out the foundations of what I need to build throughout week 3.
 ### Week 1
 
 Finished setting up the basic UI layout for a main menu and a combat menu. I also have a very basic combat scenario where you only really attack an enemy until you drain their health and they die. But it does manage to loop out of the combat when the enemy is dead and returns the player to the main menu. Started working on an action point system which will be finished into week 2.
 
 ### Week 2
 
-My next stand up will go here...
+Went and worked on a bunch of UI updates and set up a basic damage calculation for the players weapon. That week was spent on a lot of UI functions like a universal menu handler which has made making menus really easy and already built in input validation. I also spent it converting menus that I had previously not using the menu handler over to use it instead of just displaying the menu by itself. Finally that week I also built the foundation for the weapon class and the damage calculation so I could get started on the weapon customization over week 3.
 
 ### Week 3
 
