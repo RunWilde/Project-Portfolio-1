@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "UI.h"
 
 // This defines the actual firemodes possible for a weapon
 enum class FireMode
@@ -66,5 +67,8 @@ public:
 	void useBoolet();
 	void reload();
 	std::vector<FireMode> GetFireModes() const;
+
+	// Weapon Customizer Function here
+	bool Customize();
 };
 

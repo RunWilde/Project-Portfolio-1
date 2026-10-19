@@ -73,6 +73,7 @@ void Weapon::SetBarrel(Barrel newBarrel_)
 {
 	wpnBarrel_ = newBarrel_;
 
+	RecalculateStats();
 }
 
 // Weapon functions
@@ -147,4 +148,9 @@ void Weapon::reload()
 std::vector<FireMode> Weapon::GetFireModes() const
 {
 	return frMode_;
+}
+
+bool Weapon::Customize()
+{
+	return false;
 }
