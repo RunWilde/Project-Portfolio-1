@@ -90,6 +90,13 @@ void Weapon::SetCaliber(Caliber newCaliber_)
 	RecalculateStats();
 }
 
+void Weapon::SetSight(Sight newSight_)
+{
+	wpnSight_ = newSight_;
+
+	RecalculateStats();
+}
+
 // Weapon functions
 void Weapon::RecalculateStats()
 {
@@ -202,6 +209,31 @@ void Weapon::RecalculateStats()
 		dmg_ += 30;
 		armP_ += 50;
 		wt_ += 3;
+		break;
+	}
+
+	// Sight here                
+	switch (wpnSight_)
+	{
+	case Sight::irons:
+		acc_ -= 0;
+		wt_ += 0;
+		break;
+	case Sight::reddot:
+		acc_ -= 3;
+		wt_ += 1;
+		break;
+	case Sight::magreddot:
+		acc_ -= 5;
+		wt_ += 2;
+		break;
+	case Sight::midrange:
+		acc_ -= 7;
+		wt_ += 3;
+		break;
+	case Sight::longrange:
+		acc_ -= 10;
+		wt_ += 4;
 		break;
 	}
 }
@@ -331,6 +363,47 @@ void Weapon::SelectCaliber()
 	}
 }
 
+void Weapon::SelectSight()
+{
+	UI ui_;
+
+	std::vector<std::string> options = { "Irons", "Red Dot", "Magnified Red Dot", "Mid Range Optic", "Long Range Optic", "Back" };
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Sight Type", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetSight(Sight::irons);
+			return;
+
+		case 2:
+			SetSight(Sight::reddot);
+			return;
+
+		case 3:
+			SetSight(Sight::magreddot);
+			return;
+
+		case 4:
+			SetSight(Sight::midrange);
+			return;
+
+		case 5:
+			SetSight(Sight::longrange);
+			return;
+
+		case 6:
+			return;
+
+		default:
+			break;
+		}
+	}
+}
+
 void Weapon::useBoolet()
 {
 	if (curMag_ > 0)
@@ -390,7 +463,7 @@ bool Weapon::Customize()
 			break;
 			// Sight
 		case 4:
-			
+			SelectSight();
 			break;
 			// Muzzle
 		case 5:

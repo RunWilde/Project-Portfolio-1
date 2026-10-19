@@ -26,6 +26,11 @@ enum class Caliber
 	c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
 };
 
+enum class Sight
+{
+	irons, reddot, magreddot, midrange, longrange
+};
+
 class Weapon
 {
 
@@ -37,6 +42,8 @@ private:
 	//Weapon Parts
 	Barrel wpnBarrel_;
 	Caliber wpnCaliber_;
+	Sight wpnSight_;
+	
 
 	// Weapon Properties
 	int dmg_;
@@ -54,6 +61,7 @@ private:
 	void SelectWpnBase();
 	void SelectBarrel();
 	void SelectCaliber();
+	void SelectSight();
 public:
 
 	Weapon();
@@ -74,6 +82,7 @@ public:
 	void SetWpnBase(WeaponBase newBase_);
 	void SetBarrel(Barrel newBarrel_);
 	void SetCaliber(Caliber newCaliber_);
+	void SetSight(Sight newSight_);
 
 	// Weapon Action Functions
 	void useBoolet();
