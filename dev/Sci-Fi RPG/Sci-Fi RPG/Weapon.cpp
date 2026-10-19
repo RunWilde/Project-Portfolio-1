@@ -21,6 +21,7 @@ Weapon::Weapon()
 	curMag_ = 30;
 }
 
+// Weapon Identity Getters
 std::string Weapon::GetName() const
 {
 	return wpnName_;
@@ -31,6 +32,7 @@ WeaponBase Weapon::GetBase() const
 	return wpnBase_;
 }
 
+// Weapon Stat Getters
 int Weapon::GetDamage() const
 {
 	return dmg_;
@@ -66,10 +68,67 @@ int Weapon::GetCurrentMag() const
 	return curMag_;
 }
 
+// Weapon Part Setters
 void Weapon::SetBarrel(Barrel newBarrel_)
 {
 	wpnBarrel_ = newBarrel_;
 
+}
+
+// Weapon functions
+void Weapon::RecalculateStats()
+{
+	dmg_ = 25;
+	acc_ = 94;
+	armP_ = 45;
+	wt_ = 17;
+
+	// CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
+	switch (wpnBarrel_)
+	{
+	case Barrel::CompactSMG:
+		dmg_ += 5;
+		acc_ -= 5;
+		armP_ += 0;
+		wt_ += 1;
+		break;
+
+	case Barrel::SMG:
+		dmg_ += 5;
+		acc_ -= 8;
+		armP_ += 1;
+		wt_ += 1;
+		break;
+
+	case Barrel::CompactCarbine:
+		dmg_ += 10;
+		acc_ -= 10;
+		armP_ += 5;
+		wt_ += 2;
+		break;
+
+	case Barrel::Carbine:
+		dmg_ += 10;
+		acc_ -= 15;
+		armP_ += 2;
+		wt_ += 2;
+		break;
+
+	case Barrel::Rifle:
+		dmg_ += 10;
+		acc_ -= 18;
+		armP_ += 10;
+		wt_ += 3;
+		break;
+
+	case Barrel::LongRifle:
+		dmg_ += 15;
+		acc_ -= 20;
+		armP_ += 5;
+		wt_ += 4;
+		break;
+
+	}
 }
 
 void Weapon::useBoolet()

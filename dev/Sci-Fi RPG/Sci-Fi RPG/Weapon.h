@@ -42,7 +42,7 @@ private:
 	// Current Magazine amount, just to define how many bullets the weapon has at current
 	int curMag_;
 
-
+	void RecalculateStats();
 public:
 
 	Weapon();
