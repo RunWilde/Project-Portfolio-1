@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <iostream>
 #include "UI.h"
 
 // This defines the actual firemodes possible for a weapon

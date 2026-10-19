@@ -1,5 +1,6 @@
 #include "Weapon.h"
 
+
 Weapon::Weapon()
 {
 	// Weapon identity
@@ -197,7 +198,72 @@ std::vector<FireMode> Weapon::GetFireModes() const
 
 bool Weapon::Customize()
 {
+	UI ui_;
 
+	SelectBarrel();
 
-	return false;
+	std::vector<std::string> options = 
+	{ "Change Base", "Change Barrel", "Change caliber", "Change sight", "Change muzzle", "Change stock", "Change Fire Selector", "Change Magazine", "Confirm", "Cancel"};
+
+	while (true)
+	{
+		ui_.clearScreen();
+		ui_.border();
+		int accPercent = 101 - acc_;
+
+		std::cout << "Weapon: " << wpnName_ << std::endl;
+		std::cout << "Damage: " << dmg_ << std::endl;
+		std::cout << "Base Hit Chance: " << accPercent << "%" << std::endl;
+		std::cout << "Armor Pen: " << armP_ << std::endl;
+		std::cout << "Weight: " << wt_ << std::endl;
+		std::cout << "Mag size: " << magCap_ << std::endl;
+		std::cout << "Reload Cost: " << wpnRelCo_ << " AP" << std::endl;
+
+		int choice = ui_.menuHandler("             Weapon Review", options);
+
+		switch (choice)
+		{
+			// Base
+		case 1:
+			
+			break;
+			// Barrel
+		case 2:
+			SelectBarrel();
+			break;
+			// Caliber
+		case 3:
+			
+			break;
+			// Sight
+		case 4:
+			
+			break;
+			// Muzzle
+		case 5:
+
+			break;
+			// stock
+		case 6:
+
+			break;
+			// Fire Selector
+		case 7:
+
+			break;
+			// Magazine
+		case 8:
+			
+			break;
+
+		case 9:
+			return true;
+
+		case 10:
+			return false;
+
+		default:
+			break;
+		}
+	}
 }
