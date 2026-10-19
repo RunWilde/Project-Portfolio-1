@@ -9,17 +9,16 @@ Weapon::Weapon()
 
 	// Weapon Parts
 	wpnBarrel_ = Barrel::Rifle;
+	wpnCaliber_ = Caliber::c762x39;
 
 	// Weapon stats
-	dmg_ = 35;
-	armP_ = 55;
-	acc_ = 76;
-	wt_ = 20;
 	magCap_ = 30;
 	wpnRelCo_ = 1;
 	frMode_ = { FireMode::Semi, FireMode::Auto };
 
 	curMag_ = 30;
+
+	RecalculateStats();
 }
 
 // Weapon Identity Getters
@@ -84,10 +83,22 @@ void Weapon::SetBarrel(Barrel newBarrel_)
 	RecalculateStats();
 }
 
+void Weapon::SetCaliber(Caliber newCaliber_)
+{
+	wpnCaliber_ = newCaliber_;
+
+	RecalculateStats();
+}
+
 // Weapon functions
 void Weapon::RecalculateStats()
 {
-	
+	// Temporary Values to make up for missing attatcments and to reset values to default
+	dmg_ = 0;
+	armP_ = 0;
+	wt_ = 15;
+	// Stock stats standin here
+	acc_ -= 6;
 
 	// Weapon Base here, Starting accuracy threshold
 	switch (wpnBase_)
@@ -147,6 +158,51 @@ void Weapon::RecalculateStats()
 		wt_ += 4;
 		break;
 
+	}
+
+	// Caliber here
+	switch (wpnCaliber_)
+	{
+	case Caliber::c9x19mm:
+		dmg_ += 30;
+		armP_ += 0;
+		wt_ += 1;
+		break;
+	case Caliber::c45ACP:
+		dmg_ += 35;
+		armP_ += 0;
+		wt_ += 1;
+		break;
+	case Caliber::c357:
+		dmg_ += 40;
+		armP_ += 5;
+		wt_ += 1;
+		break;
+	case Caliber::c44:
+		dmg_ += 45;
+		armP_ += 10;
+		wt_ += 2;
+		break;
+	case Caliber::c545x39:
+		dmg_ += 30;
+		armP_ += 20;
+		wt_ += 2;
+		break;
+	case Caliber::c556x45:
+		dmg_ += 35;
+		armP_ += 30;
+		wt_ += 2;
+		break;
+	case Caliber::c762x39:
+		dmg_ += 25;
+		armP_ += 45;
+		wt_ += 2;
+		break;
+	case Caliber::c762x51:
+		dmg_ += 30;
+		armP_ += 50;
+		wt_ += 3;
+		break;
 	}
 }
 
@@ -222,6 +278,59 @@ void Weapon::SelectBarrel()
 	}
 }
 
+void Weapon::SelectCaliber()
+{
+	UI ui_;
+
+	std::vector<std::string> options = { "9x19mm", ".45 ACP", ".357", ".44", "5.45x39mm", "5.56x45mm", "7.62x39mm", "7.62x51mm", "Back" };
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Caliber", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetCaliber(Caliber::c9x19mm);
+			return;
+
+		case 2:
+			SetCaliber(Caliber::c45ACP);
+			return;
+
+		case 3:
+			SetCaliber(Caliber::c357);
+			return;
+
+		case 4:
+			SetCaliber(Caliber::c44);
+			return;
+
+		case 5:
+			SetCaliber(Caliber::c545x39);
+			return;
+
+		case 6:
+			SetCaliber(Caliber::c556x45);
+			return;
+
+		case 7:
+			SetCaliber(Caliber::c762x39);
+			return;
+
+		case 8:
+			SetCaliber(Caliber::c762x51);
+			return;
+
+		case 9:
+			return;
+
+		default:
+			break;
+		}
+	}
+}
+
 void Weapon::useBoolet()
 {
 	if (curMag_ > 0)
@@ -277,7 +386,7 @@ bool Weapon::Customize()
 			break;
 			// Caliber
 		case 3:
-			
+			SelectCaliber();
 			break;
 			// Sight
 		case 4:

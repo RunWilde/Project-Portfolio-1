@@ -21,6 +21,11 @@ enum class Barrel
 	CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
 };
 
+enum class Caliber
+{
+	c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
+};
+
 class Weapon
 {
 
@@ -31,6 +36,7 @@ private:
 
 	//Weapon Parts
 	Barrel wpnBarrel_;
+	Caliber wpnCaliber_;
 
 	// Weapon Properties
 	int dmg_;
@@ -47,6 +53,7 @@ private:
 	void RecalculateStats();
 	void SelectWpnBase();
 	void SelectBarrel();
+	void SelectCaliber();
 public:
 
 	Weapon();
@@ -64,9 +71,11 @@ public:
 	int GetCurrentMag() const;
 
 	// Weapon part getters/setters
-	void SetWpnBase(WeaponBase wpnBase_);
-	void SetBarrel(Barrel wpnBarrel_);
+	void SetWpnBase(WeaponBase newBase_);
+	void SetBarrel(Barrel newBarrel_);
+	void SetCaliber(Caliber newCaliber_);
 
+	// Weapon Action Functions
 	void useBoolet();
 	void reload();
 	std::vector<FireMode> GetFireModes() const;
