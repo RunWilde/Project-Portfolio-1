@@ -15,6 +15,6 @@ public:
 	void EnterToContinue();
 
 	int menuHandler(const std::string& menuTitle, const std::vector<std::string>& menuOptions);
-	
+
 };
 

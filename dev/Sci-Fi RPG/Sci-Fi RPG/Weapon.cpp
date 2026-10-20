@@ -68,6 +68,11 @@ int Weapon::GetCurrentMag() const
 	return curMag_;
 }
 
+void Weapon::SetWpnName(std::string newWpnName_)
+{
+	wpnName_ = newWpnName_;
+}
+
 void Weapon::SetWpnBase(WeaponBase newBase_)
 {
 	wpnBase_ = newBase_;
@@ -93,6 +98,34 @@ void Weapon::SetCaliber(Caliber newCaliber_)
 void Weapon::SetSight(Sight newSight_)
 {
 	wpnSight_ = newSight_;
+
+	RecalculateStats();
+}
+
+void Weapon::SetMuzzle(Muzzle newMuzzle_)
+{
+	wpnMuzzle_ = newMuzzle_;
+
+	RecalculateStats();
+}
+
+void Weapon::SetStock(Stock newStock_)
+{
+	wpnStock_ = newStock_;
+
+	RecalculateStats();
+}
+
+void Weapon::SetFireSelector(FireSelector newFireSelector_)
+{
+	wpnFireSelector_ = newFireSelector_;
+
+	RecalculateStats();
+}
+
+void Weapon::SetMagazine(Magazine newMagazine_)
+{
+	wpnMagazine_ = newMagazine_;
 
 	RecalculateStats();
 }
@@ -236,6 +269,18 @@ void Weapon::RecalculateStats()
 		wt_ += 4;
 		break;
 	}
+
+	// Muzzle here
+	switch (wpnMuzzle_)
+	{
+		case Muzzle::
+	}
+	// Stock here
+
+	// FireSelector here
+
+	// Magazine here
+
 }
 
 void Weapon::SelectWpnBase()
@@ -402,6 +447,22 @@ void Weapon::SelectSight()
 			break;
 		}
 	}
+}
+
+void Weapon::SelectMuzzle()
+{
+}
+
+void Weapon::SelectStock()
+{
+}
+
+void Weapon::SelectFireSelector()
+{
+}
+
+void Weapon::SelectMagazine()
+{
 }
 
 void Weapon::useBoolet()

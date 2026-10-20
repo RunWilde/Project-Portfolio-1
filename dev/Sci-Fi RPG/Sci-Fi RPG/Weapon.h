@@ -31,6 +31,26 @@ enum class Sight
 	irons, reddot, magreddot, midrange, longrange
 };
 
+enum class Muzzle
+{
+	flashGuard, compensator, booster, superessor, advsupressor
+};
+
+enum class Stock
+{
+	noStock, CollapseStockClpsd, CollapseStockExtd, FullStock, HeavyStock
+};
+
+enum class FireSelector
+{
+	Semi, SemiBurst, SemiAuto, Navy
+};
+
+enum class Magazine
+{
+	BreechLoaded, SmallMag, MediumMag, LargeMag, SmallDrum, Drum, Belt
+};
+
 class Weapon
 {
 
@@ -43,7 +63,10 @@ private:
 	Barrel wpnBarrel_;
 	Caliber wpnCaliber_;
 	Sight wpnSight_;
-	
+	Muzzle wpnMuzzle_;
+	Stock wpnStock_;
+	FireSelector wpnFireSelector_;
+	Magazine wpnMagazine_;
 
 	// Weapon Properties
 	int dmg_;
@@ -62,6 +85,11 @@ private:
 	void SelectBarrel();
 	void SelectCaliber();
 	void SelectSight();
+	void SelectMuzzle();
+	void SelectStock();
+	void SelectFireSelector();
+	void SelectMagazine();
+
 public:
 
 	Weapon();
@@ -79,10 +107,15 @@ public:
 	int GetCurrentMag() const;
 
 	// Weapon part getters/setters
+	void SetWpnName(std::string newWpnName_);
 	void SetWpnBase(WeaponBase newBase_);
 	void SetBarrel(Barrel newBarrel_);
 	void SetCaliber(Caliber newCaliber_);
 	void SetSight(Sight newSight_);
+	void SetMuzzle(Muzzle newMuzzle_);
+	void SetStock(Stock newStock_);
+	void SetFireSelector(FireSelector newFireSelector_);
+	void SetMagazine(Magazine newMagazine_);
 
 	// Weapon Action Functions
 	void useBoolet();
