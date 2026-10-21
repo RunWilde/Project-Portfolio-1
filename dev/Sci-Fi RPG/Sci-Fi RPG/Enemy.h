@@ -15,6 +15,8 @@ public:
 	int GetArmor() const;
 
 	void SetHealth(int value);
+	void SetMaxHealth(int value);
+	void SetArmor(int value);
 
 	bool isAlive() const;
 };

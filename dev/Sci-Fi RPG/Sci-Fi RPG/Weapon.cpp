@@ -138,12 +138,12 @@ void Weapon::RenameWeapon()
 			ui_.border();
 		}
 
-		std::cout << "Enter a new name (No spaces)\n" << std::endl;
+		std::cout << "Enter a new name.\n" << std::endl;
 		std::cout << "Name: ";
 
 		std::string newName;
 
-		std::cin >> newName;
+		getline(std::cin, newName);
 
 		SetWpnName(newName);
 		return;

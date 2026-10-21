@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <exception>
 #include "UI.h"
 
 // This defines the actual firemodes possible for a weapon

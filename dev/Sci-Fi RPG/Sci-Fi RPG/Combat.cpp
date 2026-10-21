@@ -59,6 +59,9 @@ void Combat::enemyAttack(Enemy& enemy, Player& target)
 
 void Combat::startBattle(Player& player, Enemy& enemy)
 {
+	// Reload to set the Weapons Ammo to MaxMag at start of combat
+	player.GetWeapon().reload();
+
 	// Combat encounter is active
 	inCombat_ = true;
 
