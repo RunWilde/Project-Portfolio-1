@@ -55,6 +55,8 @@ class Weapon
 {
 
 private:
+	UI ui_;
+
 	// Weapon Identity
 	std::string wpnName_;
 	WeaponBase wpnBase_;

@@ -4,18 +4,16 @@
 Weapon::Weapon()
 {
 	// Weapon identity
-	wpnName_ = "AK-47";
+	wpnName_ = "Basic Rifle";
 	wpnBase_ = WeaponBase::Rifle;
 
-	// Weapon Parts
-	wpnBarrel_ = Barrel::Rifle;
-	wpnCaliber_ = Caliber::c762x39;
-
 	// Weapon stats
+	dmg_ = 0;
+	armP_ = 0;
+	wt_ = 0;
 	magCap_ = 30;
+	frMode_ = { FireMode::Semi};
 	wpnRelCo_ = 1;
-	frMode_ = { FireMode::Semi, FireMode::Auto };
-
 	curMag_ = 30;
 
 	RecalculateStats();
@@ -133,12 +131,6 @@ void Weapon::SetMagazine(Magazine newMagazine_)
 // Weapon functions
 void Weapon::RecalculateStats()
 {
-	// Temporary Values to make up for missing attatcments and to reset values to default
-	dmg_ = 0;
-	armP_ = 0;
-	wt_ = 15;
-	// Stock stats standin here
-	acc_ -= 6;
 
 	// Weapon Base here, Starting accuracy threshold
 	switch (wpnBase_)
@@ -273,19 +265,106 @@ void Weapon::RecalculateStats()
 	// Muzzle here
 	switch (wpnMuzzle_)
 	{
-		case Muzzle::
+	case Muzzle::flashGuard:
+		acc_ += 1;
+		wt_ += 1;
+		break;
+	case Muzzle::compensator:
+		acc_ -= 2;
+		wt_ += 1;
+		break;
+	case Muzzle::booster:
+		acc_ -= 3;
+		wt_ += 2;
+		break;
+	case Muzzle::superessor:
+		acc_ -= 5;
+		wt_ += 3;
+		break;
+	case Muzzle::advsupressor:
+		acc_ -= 6;
+		wt_ += 4;
+		break;
 	}
+
 	// Stock here
+	switch (wpnStock_)
+	{
+	case Stock::noStock:
+		acc_ += 5;
+		wt_ -= 2;
+		break;
+	case Stock::CollapseStockClpsd:
+		acc_ += 2;
+		wt_ -= 1;
+		break;
+	case Stock::CollapseStockExtd:
+		acc_ -= 3;
+		wt_ += 1;
+		break;
+	case Stock::FullStock:
+		acc_ += 5;
+		wt_ += 3;
+		break;
+	case Stock::HeavyStock:
+		acc_ -= 7;
+		wt_ += 5;
+		break;
+	}
 
 	// FireSelector here
+	switch (wpnFireSelector_)
+	{
+	case FireSelector::Semi:
+		frMode_ = { FireMode::Semi };
+		break;
+	case FireSelector::SemiBurst:
+		frMode_ = { FireMode::Semi, FireMode::Burst };
+		break;
+	case FireSelector::SemiAuto:
+		frMode_ = { FireMode::Semi, FireMode::Auto };
+		break;
+	case FireSelector::Navy:
+		frMode_ = { FireMode::Semi, FireMode::Burst, FireMode::Auto };
+		break;
+	}
 
 	// Magazine here
-
+	switch (wpnMagazine_)
+	{
+	case Magazine::BreechLoaded:
+		magCap_ = 1;
+		wt_ -= 3;
+		break;
+	case Magazine::SmallMag:
+		magCap_ = 20;
+		wt_ += 2;
+		break;
+	case Magazine::MediumMag:
+		magCap_ = 30;
+		wt_ += 3;
+		break;
+	case Magazine::LargeMag:
+		magCap_ = 50;
+		wt_ += 5;
+		break;
+	case Magazine::SmallDrum:
+		magCap_ = 60;
+		wt_ += 6;
+		break;
+	case Magazine::Drum:
+		magCap_ = 100;
+		wt_ += 8;
+		break;
+	case Magazine::Belt:
+		magCap_ = 250;
+		wt_ += 10;
+		break;
+	}
 }
 
 void Weapon::SelectWpnBase()
 {
-	UI ui_;
 
 	std::vector<std::string> options = { "Pistol", "Rifle", "Back"};
 
@@ -312,7 +391,6 @@ void Weapon::SelectWpnBase()
 
 void Weapon::SelectBarrel()
 {
-	UI ui_;
 
 	std::vector<std::string> options = { "Compact SMG", "SMG", "Compact Carbine", "Carbine", "Rifle", "Long Rifle", "Back" };
 	
@@ -357,7 +435,6 @@ void Weapon::SelectBarrel()
 
 void Weapon::SelectCaliber()
 {
-	UI ui_;
 
 	std::vector<std::string> options = { "9x19mm", ".45 ACP", ".357", ".44", "5.45x39mm", "5.56x45mm", "7.62x39mm", "7.62x51mm", "Back" };
 
@@ -410,7 +487,6 @@ void Weapon::SelectCaliber()
 
 void Weapon::SelectSight()
 {
-	UI ui_;
 
 	std::vector<std::string> options = { "Irons", "Red Dot", "Magnified Red Dot", "Mid Range Optic", "Long Range Optic", "Back" };
 
@@ -451,18 +527,165 @@ void Weapon::SelectSight()
 
 void Weapon::SelectMuzzle()
 {
+
+	std::vector<std::string> options = { "Flash Guard", "Compensator", "Booster", "Supressor", "Advanced Supressor", "Back" };
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Muzzle Type", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetMuzzle(Muzzle::flashGuard);
+			return;
+
+		case 2:
+			SetMuzzle(Muzzle::compensator);
+			return;
+
+		case 3:
+			SetMuzzle(Muzzle::booster);
+			return;
+
+		case 4:
+			SetMuzzle(Muzzle::superessor);
+			return;
+
+		case 5:
+			SetMuzzle(Muzzle::advsupressor);
+			return;
+
+		case 6:
+			return;
+
+		default:
+			break;
+		}
+	}
 }
 
 void Weapon::SelectStock()
 {
+
+	std::vector<std::string> options = { "No Stock", "Collapsable Stock (Collapsed)", "Collapsable Stock (Extended)", "Full Stock", "Heavy Stock", "Back" };
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Stock Type", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetStock(Stock::noStock);
+			return;
+
+		case 2:
+			SetStock(Stock::CollapseStockClpsd);
+			return;
+
+		case 3:
+			SetStock(Stock::CollapseStockExtd);
+			return;
+
+		case 4:
+			SetStock(Stock::FullStock);
+			return;
+
+		case 5:
+			SetStock(Stock::HeavyStock);
+			return;
+
+		case 6:
+			return;
+
+		default:
+			break;
+		}
+	}
 }
 
 void Weapon::SelectFireSelector()
 {
+
+	std::vector<std::string> options = { "Semi", "Semi/Burst", "Semi/Full Auto", "Navy (All)", "Back" };
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("             Fire Selector", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetFireSelector(FireSelector::Semi);
+			return;
+
+		case 2:
+			SetFireSelector(FireSelector::SemiBurst);
+			return;
+
+		case 3:
+			SetFireSelector(FireSelector::SemiAuto);
+			return;
+
+		case 4:
+			SetFireSelector(FireSelector::Navy);
+			return;
+
+		case 5:
+			return;
+
+		default:
+			break;
+		}
+	}
 }
 
 void Weapon::SelectMagazine()
 {
+
+	std::vector<std::string> options = { "Breech Loaded", "Small Magazine", "Medium Magazine", "Large Magazine", "Small Drum", "Drum", "Belt Fed"};
+
+	while (true)
+	{
+		int choice = ui_.menuHandler("           Magazine Type", options);
+
+		switch (choice)
+		{
+		case 1:
+			SetMagazine(Magazine::BreechLoaded);
+			return;
+
+		case 2:
+			SetMagazine(Magazine::SmallMag);
+			return;
+
+		case 3:
+			SetMagazine(Magazine::MediumMag);
+			return;
+
+		case 4:
+			SetMagazine(Magazine::LargeMag);
+			return;
+
+		case 5:
+			SetMagazine(Magazine::SmallDrum);
+			return;
+
+		case 6:
+			SetMagazine(Magazine::Drum);
+			return;
+
+		case 7:
+			SetMagazine(Magazine::Belt);
+
+		case 8:
+			return;
+
+		default:
+			break;
+		}
+	}
 }
 
 void Weapon::useBoolet()
@@ -485,10 +708,9 @@ std::vector<FireMode> Weapon::GetFireModes() const
 
 bool Weapon::Customize()
 {
-	UI ui_;
 
 	std::vector<std::string> options = 
-	{ "Change Base", "Change Barrel", "Change caliber", "Change sight", "Change muzzle", "Change stock", "Change Fire Selector", "Change Magazine", "Confirm", "Cancel"};
+	{ "Change Base", "Change Barrel", "Change caliber", "Change sight", "Change muzzle", "Change stock", "Change Fire Selector", "Change Magazine", "Change Name", "Confirm Changes", "Cancel"};
 
 	while (true)
 	{
@@ -510,43 +732,53 @@ bool Weapon::Customize()
 
 		switch (choice)
 		{
-			// Base
 		case 1:
+			// Base
 			SelectWpnBase();
 			break;
-			// Barrel
+			
 		case 2:
+			// Barrel
 			SelectBarrel();
 			break;
-			// Caliber
+			
 		case 3:
+			// Caliber
 			SelectCaliber();
 			break;
-			// Sight
+			
 		case 4:
+			// Sight
 			SelectSight();
 			break;
-			// Muzzle
-		case 5:
-
-			break;
-			// stock
-		case 6:
-
-			break;
-			// Fire Selector
-		case 7:
-
-			break;
-			// Magazine
-		case 8:
 			
+		case 5:
+			// Muzzle
+			SelectMuzzle();
+			break;
+			
+		case 6:
+			// stock
+			SelectStock();
+			break;
+			
+		case 7:
+			// Fire Selector
+			SelectFireSelector();
+			break;
+			
+		case 8:
+			// Magazine
+			SelectMagazine();
 			break;
 
 		case 9:
-			return true;
+			break;
 
 		case 10:
+			return true;
+
+		case 11:
 			return false;
 
 		default:
