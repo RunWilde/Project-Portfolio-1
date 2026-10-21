@@ -4,17 +4,18 @@
 Weapon::Weapon()
 {
 	// Weapon identity
-	wpnName_ = "Basic Rifle";
-	wpnBase_ = WeaponBase::Rifle;
+	wpnName_ = "Unnamed Weapon";
 
-	// Weapon stats
-	dmg_ = 0;
-	armP_ = 0;
-	wt_ = 0;
-	magCap_ = 30;
-	frMode_ = { FireMode::Semi};
-	wpnRelCo_ = 1;
-	curMag_ = 30;
+	wpnBase_ = WeaponBase::None;
+	wpnBarrel_ = Barrel::None;
+	wpnCaliber_ = Caliber::None;
+	wpnSight_ = Sight::None;
+	wpnMuzzle_ = Muzzle::None;
+	wpnStock_ = Stock::None;
+	wpnFireSelector_ = FireSelector::None;
+	wpnMagazine_ = Magazine::None;
+
+	curMag_ = 0;
 
 	RecalculateStats();
 }
@@ -152,7 +153,16 @@ void Weapon::RenameWeapon()
 // Weapon functions
 void Weapon::RecalculateStats()
 {
+	// Rebuild totals from scratch everytime components change.
+	dmg_ = 0;
+	armP_ = 0;
+	wt_ = 0;
+	magCap_ = 0;
+	wpnRelCo_ = 0;
 
+	acc_ = 100;
+
+	frMode_ = { FireMode::Semi };
 	// Weapon Base here, Starting accuracy threshold
 	switch (wpnBase_)
 	{
@@ -356,30 +366,37 @@ void Weapon::RecalculateStats()
 	case Magazine::BreechLoaded:
 		magCap_ = 1;
 		wt_ -= 3;
+		wpnRelCo_ += 0;
 		break;
 	case Magazine::SmallMag:
 		magCap_ = 20;
 		wt_ += 2;
+		wpnRelCo_ += 1;
 		break;
 	case Magazine::MediumMag:
 		magCap_ = 30;
 		wt_ += 3;
+		wpnRelCo_ += 1;
 		break;
 	case Magazine::LargeMag:
 		magCap_ = 50;
 		wt_ += 5;
+		wpnRelCo_ += 2;
 		break;
 	case Magazine::SmallDrum:
 		magCap_ = 60;
 		wt_ += 6;
+		wpnRelCo_ += 2;
 		break;
 	case Magazine::Drum:
 		magCap_ = 100;
 		wt_ += 8;
+		wpnRelCo_ += 3;
 		break;
 	case Magazine::Belt:
 		magCap_ = 250;
 		wt_ += 10;
+		wpnRelCo_ += 4;
 		break;
 	}
 }

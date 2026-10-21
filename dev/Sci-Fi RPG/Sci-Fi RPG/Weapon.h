@@ -13,42 +13,42 @@ enum class FireMode
 // Mainly using this to calculate a weapons accuracy threshold/starting numbers. Still WIP
 enum class WeaponBase
 {
-	Pistol,Rifle
+	None, Pistol, Rifle
 };
 
 enum class Barrel
 {
-	CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
+	None, CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
 };
 
 enum class Caliber
 {
-	c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
+	None, c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
 };
 
 enum class Sight
 {
-	irons, reddot, magreddot, midrange, longrange
+	None, irons, reddot, magreddot, midrange, longrange
 };
 
 enum class Muzzle
 {
-	flashGuard, compensator, booster, superessor, advsupressor
+	None, flashGuard, compensator, booster, superessor, advsupressor
 };
 
 enum class Stock
 {
-	noStock, CollapseStockClpsd, CollapseStockExtd, FullStock, HeavyStock
+	None, noStock, CollapseStockClpsd, CollapseStockExtd, FullStock, HeavyStock
 };
 
 enum class FireSelector
 {
-	Semi, SemiBurst, SemiAuto, Navy
+	None, Semi, SemiBurst, SemiAuto, Navy
 };
 
 enum class Magazine
 {
-	BreechLoaded, SmallMag, MediumMag, LargeMag, SmallDrum, Drum, Belt
+	None, BreechLoaded, SmallMag, MediumMag, LargeMag, SmallDrum, Drum, Belt
 };
 
 class Weapon
