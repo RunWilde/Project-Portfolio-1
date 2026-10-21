@@ -91,6 +91,7 @@ private:
 	void SelectStock();
 	void SelectFireSelector();
 	void SelectMagazine();
+	void RenameWeapon();
 
 public:
 

@@ -128,6 +128,27 @@ void Weapon::SetMagazine(Magazine newMagazine_)
 	RecalculateStats();
 }
 
+void Weapon::RenameWeapon()
+{
+	while (true)
+	{
+		{
+			ui_.clearScreen();
+			ui_.border();
+		}
+
+		std::cout << "Enter a new name (No spaces)\n" << std::endl;
+		std::cout << "Name: ";
+
+		std::string newName;
+
+		std::cin >> newName;
+
+		SetWpnName(newName);
+		return;
+	}
+}
+
 // Weapon functions
 void Weapon::RecalculateStats()
 {
@@ -773,6 +794,8 @@ bool Weapon::Customize()
 			break;
 
 		case 9:
+			// Weapon Name
+			RenameWeapon();
 			break;
 
 		case 10:
