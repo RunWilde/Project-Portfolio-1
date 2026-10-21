@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <exception>
 #include "UI.h"
 
 // This defines the actual firemodes possible for a weapon
@@ -13,23 +14,50 @@ enum class FireMode
 // Mainly using this to calculate a weapons accuracy threshold/starting numbers. Still WIP
 enum class WeaponBase
 {
-	Pistol,Rifle
+	None, Pistol, Rifle
 };
 
 enum class Barrel
 {
-	CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
+	None, CompactSMG, SMG, CompactCarbine, Carbine, Rifle, LongRifle
 };
 
 enum class Caliber
 {
-	c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
+	None, c9x19mm, c45ACP, c357, c44, c545x39, c556x45, c762x39, c762x51
+};
+
+enum class Sight
+{
+	None, irons, reddot, magreddot, midrange, longrange
+};
+
+enum class Muzzle
+{
+	None, flashGuard, compensator, booster, superessor, advsupressor
+};
+
+enum class Stock
+{
+	None, noStock, CollapseStockClpsd, CollapseStockExtd, FullStock, HeavyStock
+};
+
+enum class FireSelector
+{
+	None, Semi, SemiBurst, SemiAuto, Navy
+};
+
+enum class Magazine
+{
+	None, BreechLoaded, SmallMag, MediumMag, LargeMag, SmallDrum, Drum, Belt
 };
 
 class Weapon
 {
 
 private:
+	UI ui_;
+
 	// Weapon Identity
 	std::string wpnName_;
 	WeaponBase wpnBase_;
@@ -37,6 +65,11 @@ private:
 	//Weapon Parts
 	Barrel wpnBarrel_;
 	Caliber wpnCaliber_;
+	Sight wpnSight_;
+	Muzzle wpnMuzzle_;
+	Stock wpnStock_;
+	FireSelector wpnFireSelector_;
+	Magazine wpnMagazine_;
 
 	// Weapon Properties
 	int dmg_;
@@ -54,6 +87,13 @@ private:
 	void SelectWpnBase();
 	void SelectBarrel();
 	void SelectCaliber();
+	void SelectSight();
+	void SelectMuzzle();
+	void SelectStock();
+	void SelectFireSelector();
+	void SelectMagazine();
+	void RenameWeapon();
+
 public:
 
 	Weapon();
@@ -71,9 +111,15 @@ public:
 	int GetCurrentMag() const;
 
 	// Weapon part getters/setters
+	void SetWpnName(std::string newWpnName_);
 	void SetWpnBase(WeaponBase newBase_);
 	void SetBarrel(Barrel newBarrel_);
 	void SetCaliber(Caliber newCaliber_);
+	void SetSight(Sight newSight_);
+	void SetMuzzle(Muzzle newMuzzle_);
+	void SetStock(Stock newStock_);
+	void SetFireSelector(FireSelector newFireSelector_);
+	void SetMagazine(Magazine newMagazine_);
 
 	// Weapon Action Functions
 	void useBoolet();

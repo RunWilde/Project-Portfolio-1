@@ -16,6 +16,60 @@ void Game::newGame()
 	Enemy enemy;
 	Combat combat;
 
+	ui_.clearScreen();
+	ui_.border();
+	std::cout << "Configure Enemy Health/Armor" << std::endl;
+	ui_.border();
+	ui_.EnterToContinue();
+
+	int health;
+	int armor;
+
+	while (true)
+	{
+		ui_.border();
+		std::cout << "Enter a value for the Enemy's health.\n" << "Select a value between 0 - 10000:" <<std::endl;
+		std::cin >> health;
+		
+		if (health <= 0 || health > 10000)
+		{
+			ui_.border();
+			std::cout << "Please enter a value above 0 and below 10000." << std::endl;
+			ui_.border();
+			ui_.EnterToContinue();
+			continue;
+		}
+		else
+		{
+			enemy.SetMaxHealth(health);
+			enemy.SetHealth(health);
+			break;
+		}
+	}
+
+	ui_.clearScreen();
+	while (true)
+	{
+		ui_.border();
+		std::cout << "Enter a value for the Enemy's armor.\n" << "Select a value between 0 - 100:" << std::endl;
+		std::cin >> armor;
+
+		if (armor <= 0 || armor > 100)
+		{
+			ui_.border();
+			std::cout << "Please enter a value above 0 and below 100." << std::endl;
+			ui_.border();
+			ui_.EnterToContinue();
+			continue;
+		}
+		else
+		{
+			enemy.SetArmor(armor);
+			break;
+		}
+	}
+
+	ui_.clearScreen();
 	combat.startBattle(player_, enemy);
 }
 

@@ -13,6 +13,16 @@ int Enemy::GetArmor() const { return armor_; }
 
 void Enemy::SetHealth(int value) { health_ = value; }
 
+void Enemy::SetMaxHealth(int value)
+{
+	maxHealth_ = value;
+}
+
+void Enemy::SetArmor(int value)
+{
+	armor_ = value;
+}
+
 bool Enemy::isAlive() const
 {
 	bool living;

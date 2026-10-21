@@ -59,6 +59,9 @@ void Combat::enemyAttack(Enemy& enemy, Player& target)
 
 void Combat::startBattle(Player& player, Enemy& enemy)
 {
+	// Reload to set the Weapons Ammo to MaxMag at start of combat
+	player.GetWeapon().reload();
+
 	// Combat encounter is active
 	inCombat_ = true;
 
@@ -259,21 +262,21 @@ void Combat::weaponActions(Player& player, Enemy& enemy, int& actionPoints)
 	ui_.EnterToContinue();
 }
 
-void Combat::enemyTurn(Player& player, Enemy& enemy)
-{
-	/*playerTakeDamage(player, 30);*/
-
-	if (!player.isAlive())
-	{
-		inCombat_ = false;
-	}
-}
+//void Combat::enemyTurn(Player& player, Enemy& enemy)
+//{
+//	/*playerTakeDamage(player, 30);*/
+//
+//	if (!player.isAlive())
+//	{
+//		inCombat_ = false;
+//	}
+//}
 
 void Combat::combatStats(const Player& player, const Enemy& enemy, int actionPoints, int turnCount)
 {
 	ui_.border();
 
-	std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";
+	/*std::cout << "Player HP: " << player.GetHealth() << "/" << player.GetMaxHealth() << "\n";*/
 
 	const Weapon& weapon = player.GetWeapon();
 	std::cout << "Weapon: " << weapon.GetName() << "  |  ";
