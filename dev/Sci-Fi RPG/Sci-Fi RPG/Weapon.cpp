@@ -716,6 +716,7 @@ void Weapon::SelectMagazine()
 
 		case 7:
 			SetMagazine(Magazine::Belt);
+			return;
 
 		case 8:
 			return;
