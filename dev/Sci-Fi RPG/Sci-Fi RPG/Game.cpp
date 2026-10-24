@@ -95,15 +95,11 @@ void Game::handleMainMenu()
 		break;
 	}
 	case 2:
-		// Load saved Weapon
-		break;
-
-	case 3:
 		// Enter the firing range
 		newGame();
 		break;
 
-	case 4:
+	case 3:
 		// Stop main loop and exit application
 		running_ = false;
 		break;
