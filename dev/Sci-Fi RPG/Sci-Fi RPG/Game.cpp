@@ -119,7 +119,7 @@ void Game::newGame()
 
 void Game::handleMainMenu()
 {
-	std::vector<std::string> options = { "Customize Weapon", "Load Weapon", "Enter Firing Range", "Exit" };
+	std::vector<std::string> options = { "Customize Weapon", "Enter Firing Range", "Exit" };
 
 	int choice = ui_.menuHandler("             Main Menu", options);
 
