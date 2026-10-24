@@ -138,7 +138,6 @@ void Game::handleMainMenu()
 
 		break;
 	}
-
 	case 2:
 		// Enter the firing range
 		newGame();
