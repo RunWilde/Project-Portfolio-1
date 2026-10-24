@@ -22,51 +22,95 @@ void Game::newGame()
 	ui_.border();
 	ui_.EnterToContinue();
 
-	int health;
-	int armor;
+	int health = 0;
+	int armor = 0;
 
 	while (true)
 	{
 		ui_.border();
-		std::cout << "Enter a value for the Enemy's health.\n" << "Select a value between 0 - 10000:" <<std::endl;
-		std::cin >> health;
+		std::cout << "Enter a value for the Enemy's health.\n" << "Select a value between 100 - 1000:" <<std::endl;
 		
-		if (health <= 0 || health > 10000)
+		std::string tempChoice;
+
+		if (!std::getline(std::cin, tempChoice))
 		{
-			ui_.border();
-			std::cout << "Please enter a value above 0 and below 10000." << std::endl;
-			ui_.border();
-			ui_.EnterToContinue();
-			continue;
+			return;
 		}
-		else
+
+		bool isValidNumber = !tempChoice.empty() && tempChoice.size() <= 4;
+
+		for (int i = 0; i < tempChoice.size(); i++)
 		{
-			enemy.SetMaxHealth(health);
-			enemy.SetHealth(health);
-			break;
+			if (tempChoice[i] < '0' || tempChoice[i] > '9')
+			{
+				isValidNumber = false;
+				break;
+			}
 		}
+
+		if (isValidNumber)
+		{
+			health = std::stoi(tempChoice);
+
+			if (health >= 100 && health <= 1000)
+			{
+				enemy.SetMaxHealth(health);
+				enemy.SetHealth(health);
+				break;
+			}
+		}
+
+		ui_.clearScreen();
+		ui_.border();
+		std::cout << "Please enter a number between 100 - 1000" << std::endl;
+		ui_.border();
+		ui_.EnterToContinue();
 	}
 
 	ui_.clearScreen();
+
 	while (true)
 	{
 		ui_.border();
-		std::cout << "Enter a value for the Enemy's armor.\n" << "Select a value between 0 - 100:" << std::endl;
-		std::cin >> armor;
+		std::cout << "Enter a value for the Enemy's armor.\n"
+			<< "Select a value between 0 - 100:" << std::endl;
 
-		if (armor <= 0 || armor > 100)
+		std::string tempChoice;
+
+		if (!std::getline(std::cin, tempChoice))
 		{
-			ui_.border();
-			std::cout << "Please enter a value above 0 and below 100." << std::endl;
-			ui_.border();
-			ui_.EnterToContinue();
-			continue;
+			return;
 		}
-		else
+
+		bool isValidNumber =
+			!tempChoice.empty() && tempChoice.size() <= 3;
+
+		for (int i = 0; i < tempChoice.size(); i++)
 		{
-			enemy.SetArmor(armor);
-			break;
+			if (tempChoice[i] < '0' || tempChoice[i] > '9')
+			{
+				isValidNumber = false;
+				break;
+			}
 		}
+
+		if (isValidNumber)
+		{
+			armor = std::stoi(tempChoice);
+
+			if (armor >= 0 && armor <= 100)
+			{
+				enemy.SetArmor(armor);
+				break;
+			}
+		}
+
+		ui_.clearScreen();
+		ui_.border();
+		std::cout << "Please enter a whole number between 0 - 100."
+			<< std::endl;
+		ui_.border();
+		ui_.EnterToContinue();
 	}
 
 	ui_.clearScreen();

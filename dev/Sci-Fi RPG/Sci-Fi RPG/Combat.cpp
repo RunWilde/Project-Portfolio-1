@@ -281,7 +281,8 @@ void Combat::combatStats(const Player& player, const Enemy& enemy, int actionPoi
 	const Weapon& weapon = player.GetWeapon();
 	std::cout << "Weapon: " << weapon.GetName() << "  |  ";
 	std::cout << "Ammo: " << weapon.GetCurrentMag() << "/" << weapon.GetMagCap() << "\n";
-	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "\n";
+	std::cout << "Enemy HP: " << enemy.GetHealth() << "/" << enemy.GetMaxHealth() << "  |  ";
+	std::cout << "Enemy Armor:" << enemy.GetArmor() << "\n";
 	std::cout << "\nAction Points Remaining: " << actionPoints << "\n";
 	std::cout << "Turn: " << turnCount << "\n";
 }

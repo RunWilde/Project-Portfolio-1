@@ -13,6 +13,7 @@ public:
 	void clearScreen();
 	void invalidChoice();
 	void EnterToContinue();
+	void IsValidNumber();
 
 	int menuHandler(const std::string& menuTitle, const std::vector<std::string>& menuOptions);
 
